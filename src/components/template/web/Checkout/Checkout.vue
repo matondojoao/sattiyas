@@ -113,17 +113,21 @@
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                                                 checked="">
                                             <label class="form-check-label m-0 cs_semi_bold" for="flexCheckDefault">
-                                                Pagar na entrega
+                                                Pagar com Cartão de Crédito na Entrega
                                             </label>
                                         </div>
-                                        <p class="m-0 cs_payment_text">Pague em dinheiro no momento da entrega.</p>
+                                        <p class="m-0 cs_payment_text">Efetue o pagamento com cartão de crédito no momento
+                                            da entrega.</p>
                                     </td>
+
                                 </tr>
                             </tbody>
                         </table>
                         <div class="cs_height_20 cs_height_lg_20"></div>
-                        <p class="m-0 cs_payment_text">Seus dados pessoais serão usados para processar seu pedido, apoiar sua
-                            experiência neste site e para outros fins descritos em nossa <a href="">política de privacidade</a>.</p>
+                        <p class="m-0 cs_payment_text">Seus dados pessoais serão usados para processar seu pedido, apoiar
+                            sua
+                            experiência neste site e para outros fins descritos em nossa <a href="">política de
+                                privacidade</a>.</p>
                         <div class="cs_height_20 cs_height_lg_20"></div>
                         <button class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">Pagar Agora</button>
                     </div>
@@ -133,5 +137,4 @@
         </div>
     </div>
     <div class="cs_height_90 cs_height_lg_50"></div>
-    <hr>
-</template>
+    <hr></template>
