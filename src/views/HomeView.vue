@@ -10,6 +10,7 @@ import Partners from '@/components/template/web/home/Partners.vue'
 import Testimonial from '@/components/template/web/home/Testimonial.vue'
 import SecondCollection from '@/components/template/web/home/SecondCollection.vue'
 import TopSellingAccessories from '@/components/template/web/home/TopSellingAccessories.vue'
+import Newsletter from '@/components/template/web/home/Newsletter.vue'
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js'
 
@@ -30,4 +31,5 @@ onMounted(() => {
   <Testimonial />
   <SecondCollection />
   <TopSellingAccessories />
+  <Newsletter />
 </template>
