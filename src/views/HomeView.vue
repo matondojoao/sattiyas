@@ -7,6 +7,7 @@ import MovingTextSlider from '@/components/template/web/home/MovingTextSlider.vu
 import Collection from '@/components/template/web/home/Collection.vue'
 import NewItemsStore from '@/components/template/web/home/NewItemsStore.vue'
 import Partners from '@/components/template/web/home/Partners.vue'
+import Testimonial from '@/components/template/web/home/Testimonial.vue'
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js'
 
@@ -24,4 +25,5 @@ onMounted(() => {
   <Collection />
   <NewItemsStore />
   <Partners />
+  <Testimonial />
 </template>
