@@ -171,8 +171,6 @@
       </div>
     </div>
   </header>
-  <div class="cs_height_140 cs_height_lg_80"></div>
-  <!-- End header -->
 </template>
 
 <script>
