@@ -1,3 +1,6 @@
+<script setup>
+  import { RouterLink } from "vue-router";
+</script>
 <template>
   <header class="cs_site_header cs_style_1 cs_color_1 cs_primary_bg cs_site_header_full_width cs_sticky_header">
     <div class="cs_top_header cs_primary_color">
@@ -48,21 +51,11 @@
           <div class="cs_main_header_center">
             <div class="cs_nav cs_medium">
               <ul class="cs_nav_list">
-                <li class="menu-item-has-children">
-                  <a href="index.html">Início</a>
-                  <ul>
-                    <li><a href="index.html">Moda V1</a></li>
-                    <li><a href="home-v2.html">Moda V2</a></li>
-                    <li><a href="home-v3.html">Joias</a></li>
-                  </ul>
+                <li class="menu-item">
+                  <RouterLink :to="{name:'home'}">Início</RouterLink>
                 </li>
-                <li class="menu-item-has-children">
-                  <a href="shop.html">Produtos</a>
-                  <ul>
-                    <li><a href="shop.html">Todos os Produtos</a></li>
-                    <li><a href="shop_sidebar.html">Barra lateral da Loja</a></li>
-                    <li><a href="product_details.html">Detalhes do Produto</a></li>
-                  </ul>
+                <li class="menu-item">
+                  <RouterLink :to="{name:'shop'}">Produtos</RouterLink>
                 </li>
                 <li><a href="blog.html">Blog</a></li>
                 <li class="menu-item-has-children">
