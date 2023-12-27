@@ -116,8 +116,7 @@
                                                 Pagar com Cartão de Crédito na Entrega
                                             </label>
                                         </div>
-                                        <p class="m-0 cs_payment_text">Efetue o pagamento com cartão de crédito no momento
-                                            da entrega.</p>
+                                        <p class="m-0 cs_payment_text">Efetue o pagamento com cartão de crédito.</p>
                                     </td>
 
                                 </tr>
