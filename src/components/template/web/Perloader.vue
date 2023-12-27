@@ -1,5 +1,4 @@
 <template>
-    <!-- Start Preloader -->
   <div class="cs_perloader">
     <div class="cs_perloader_in">
       <svg class="cs_cart_animation" role="img" aria-label="Sattiyas Preloader" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
@@ -23,5 +22,4 @@
       <span class="cs_perloader_text">Welcome to Sattiyas. Loading...</span>
     </div>
   </div>
-  <!-- End Preloader -->
 </template>
