@@ -2,6 +2,7 @@
 import Hero from '@/components/template/web/home/Hero.vue'
 import IconBoxes from '@/components/template/web/home/IconBoxes.vue'
 import Category from '@/components/template/web/home/Category.vue'
+import FeaturedItems from '@/components/template/web/home/FeaturedItems.vue'
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js'
 
@@ -14,4 +15,5 @@ onMounted(() => {
   <Hero />
   <IconBoxes />
   <Category />
+  <FeaturedItems />
 </template>
