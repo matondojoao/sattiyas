@@ -1,5 +1,6 @@
+<script setup>
+   import Heading from '@/components/template/web/checkout/Heading.vue';
+</script>
 <template>
-    <div>
-
-    </div>
+   <Heading />
 </template>
