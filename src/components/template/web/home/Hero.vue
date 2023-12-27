@@ -2,8 +2,8 @@
    import imagePath1 from "@/assets/img/hero1.jpg"
    import imagePath2 from "@/assets/img/hero3.jpg"
    import imagePath3 from "@/assets/img/hero4.jpg"
-
 </script>
+
 <template>
    <div class="cs_height_140 cs_height_lg_80"></div>
    <section class="cs_slider position-relative">
@@ -12,9 +12,9 @@
         <div class="slick_slide_in">
           <div class="cs_hero cs_style_1">
             <div class="cs_hero_text">
-              <h1 class="cs_heto_title cs_fs_67 cs_bold">Winter Collection For Women</h1>
-              <p class="cs_heto_subtitle">we are more than just an online shopping destination; we're your personal gateway to a world of fashion, trendsetting styles, and unparalleled convenience. We believe that fashion is a reflection of your individuality, and our mission is to make every shopping experience with us.</p>
-              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Shop Now</a>
+              <h1 class="cs_heto_title cs_fs_67 cs_bold">Coleção de Inverno para Mulheres</h1>
+              <p class="cs_heto_subtitle">Somos mais do que apenas um destino de compras online; somos sua porta de entrada pessoal para um mundo de moda, estilos inovadores e conveniência incomparável. Acreditamos que a moda é um reflexo da sua individualidade, e nossa missão é tornar cada experiência de compra conosco única.</p>
+              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Compre Agora</a>
             </div>
             <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath1})` }"></div>
           </div>
@@ -22,9 +22,9 @@
         <div class="slick_slide_in">
           <div class="cs_hero cs_style_1">
             <div class="cs_hero_text">
-              <h1 class="cs_heto_title cs_fs_67 cs_bold">T-Shirt Collection For Women</h1>
-              <p class="cs_heto_subtitle">we are more than just an online shopping destination; we're your personal gateway to a world of fashion, trendsetting styles, and unparalleled convenience. We believe that fashion is a reflection of your individuality, and our mission is to make every shopping experience with us.</p>
-              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Shop Now</a>
+              <h1 class="cs_heto_title cs_fs_67 cs_bold">Coleção de Camisetas para Mulheres</h1>
+              <p class="cs_heto_subtitle">Somos mais do que apenas um destino de compras online; somos sua porta de entrada pessoal para um mundo de moda, estilos inovadores e conveniência incomparável. Acreditamos que a moda é um reflexo da sua individualidade, e nossa missão é tornar cada experiência de compra conosco única.</p>
+              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Compre Agora</a>
             </div>
             <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath2})` }"></div>
           </div>
@@ -32,9 +32,9 @@
         <div class="slick_slide_in">
           <div class="cs_hero cs_style_1">
             <div class="cs_hero_text">
-              <h1 class="cs_heto_title cs_fs_67 cs_bold">Skirts Collection For Women</h1>
-              <p class="cs_heto_subtitle">we are more than just an online shopping destination; we're your personal gateway to a world of fashion, trendsetting styles, and unparalleled convenience. We believe that fashion is a reflection of your individuality, and our mission is to make every shopping experience with us.</p>
-              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Shop Now</a>
+              <h1 class="cs_heto_title cs_fs_67 cs_bold">Coleção de Saias para Mulheres</h1>
+              <p class="cs_heto_subtitle">Somos mais do que apenas um destino de compras online; somos sua porta de entrada pessoal para um mundo de moda, estilos inovadores e conveniência incomparável. Acreditamos que a moda é um reflexo da sua individualidade, e nossa missão é tornar cada experiência de compra conosco única.</p>
+              <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Compre Agora</a>
             </div>
             <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath3})` }">
             </div>
