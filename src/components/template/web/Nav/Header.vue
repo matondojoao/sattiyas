@@ -4,37 +4,38 @@
     <div class="cs_top_header cs_primary_color">
       <div class="container-fluid">
         <div class="cs_top_header_in">
-          <div class="cs_top_header_left">
-            <p class="cs_medium mb-0">Support : <a>product@sattiyas.com</a></p>
-          </div>
-          <div class="cs_top_header_center">
-            <div class="cd-headline slide">
-              <span class="cd-words-wrapper text-center">
-                <b class="cs_text_slide cs_medium is-visible">
-                  <span>100% Happy return policy</span>
-                  <span>
-                    <a href="about.html" class="cs_text_slide_btn">Learn More</a>
-                  </span>
-                </b>
-                <b class="cs_text_slide cs_medium">
-                  <span>Big sale offer with 50%</span>
-                  <span>
-                    <a href="shop.html" class="cs_text_slide_btn">Learn More</a>
-                  </span>
-                </b>
-                <b class="cs_text_slide cs_medium">
-                  <span>New arrival item for you</span>
-                  <span>
-                    <a href="shop.html" class="cs_text_slide_btn">Learn More</a>
-                  </span>
-                </b>
-              </span>
-            </div>
-          </div>
-          <div class="cs_top_header_right">
-            <p class="cs_medium mb-0">Mon-Fri Open : 11:00 - 19:00</p>
-          </div>
-        </div>
+  <div class="cs_top_header_left">
+    <p class="cs_medium mb-0">Suporte: <a>produto@sattiyas.com</a></p>
+  </div>
+  <div class="cs_top_header_center">
+    <div class="cd-headline slide">
+      <span class="cd-words-wrapper text-center">
+        <b class="cs_text_slide cs_medium is-visible">
+          <span>Política de devolução feliz com 100%</span>
+          <span>
+            <a href="about.html" class="cs_text_slide_btn">Saiba Mais</a>
+          </span>
+        </b>
+        <b class="cs_text_slide cs_medium">
+          <span>Oferta especial com 50% de desconto</span>
+          <span>
+            <a href="shop.html" class="cs_text_slide_btn">Saiba Mais</a>
+          </span>
+        </b>
+        <b class="cs_text_slide cs_medium">
+          <span>Novo item de chegada para você</span>
+          <span>
+            <a href="shop.html" class="cs_text_slide_btn">Saiba Mais</a>
+          </span>
+        </b>
+      </span>
+    </div>
+  </div>
+  <div class="cs_top_header_right">
+    <p class="cs_medium mb-0">Aberto de Segunda a Sexta: 11:00 - 19:00</p>
+  </div>
+</div>
+
       </div>
     </div>
     <div class="cs_main_header">
@@ -46,85 +47,86 @@
             </a>
           </div>
           <div class="cs_main_header_center">
-            <div class="cs_nav cs_medium">
-              <ul class="cs_nav_list">
-                <li class="menu-item-has-children">
-                  <a href="index.html">Home</a>
-                  <ul>
-                    <li><a href="index.html">Fashion V1</a></li>
-                    <li><a href="home-v2.html">Fashion V2</a></li>
-                    <li><a href="home-v3.html">Jewelry</a></li>
-                  </ul>
-                </li>
-                <li class="menu-item-has-children">
-                  <a href="shop.html">Product</a>
-                  <ul>
-                    <li><a href="shop.html">All Product</a></li>
-                    <li><a href="shop_sidebar.html">Shop Sidebar</a></li>
-                    <li><a href="product_details.html">Product Details</a></li>
-                  </ul>
-                </li>
-                <li><a href="blog.html">Blog</a></li>
-                <li class="menu-item-has-children">
-                  <a href="">Pages</a>
-                  <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog_details.html">Blog Details</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
-                    <li><a href="success.html">Success</a></li>
-                    <li><a href="wishlist.html">Wishlist</a></li>
-                  </ul>
-                </li>
-                <li class="menu-item-has-children cs_mega_menu">
-                  <a href="">MegaMenu</a>
-                  <ul class="cs_mega_wrapper">
-                    <li class="menu-item-has-children">
-                      <a href="">Category One</a>
-                      <ul>
-                        <li><a href="shop.html">Women's Clothing</a></li>
-                        <li><a href="shop.html">Men's Clothing</a></li>
-                        <li><a href="shop.html">Kids' Clothing</a></li>
-                        <li><a href="shop.html">Shoes (Men, Women, Kids)</a></li>
-                        <li><a href="shop.html">Accessories (e.g., hats, scarves)</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Category Two</a>
-                      <ul>
-                        <li><a href="shop.html">Activewear</a></li>
-                        <li><a href="shop.html">Formal Wear</a></li>
-                        <li><a href="shop.html">Casual Wear</a></li>
-                        <li><a href="shop.html">Outerwear (Jackets, Coats)</a></li>
-                        <li><a href="shop.html">Swimwear</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Category Three</a>
-                      <ul>
-                        <li><a href="shop.html">Lingerie and Sleepwear</a></li>
-                        <li><a href="shop.html">Maternity Wear</a></li>
-                        <li><a href="shop.html">Plus Size Clothing</a></li>
-                        <li><a href="shop.html">Sustainable Fashion</a></li>
-                        <li><a href="shop.html">Vintage/Second-hand Clothing</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Category Four</a>
-                      <ul>
-                        <li><a href="shop.html">Sports Apparel</a></li>
-                        <li><a href="shop.html">Workwear</a></li>
-                        <li><a href="shop.html">Designer Clothing</a></li>
-                        <li><a href="shop.html">Seasonal Collections</a></li>
-                        <li><a href="shop.html">Costumes and Cosplay</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
-              </ul>
-            </div>
-          </div>
+  <div class="cs_nav cs_medium">
+    <ul class="cs_nav_list">
+      <li class="menu-item-has-children">
+        <a href="index.html">Início</a>
+        <ul>
+          <li><a href="index.html">Moda V1</a></li>
+          <li><a href="home-v2.html">Moda V2</a></li>
+          <li><a href="home-v3.html">Joias</a></li>
+        </ul>
+      </li>
+      <li class="menu-item-has-children">
+        <a href="shop.html">Produtos</a>
+        <ul>
+          <li><a href="shop.html">Todos os Produtos</a></li>
+          <li><a href="shop_sidebar.html">Barra lateral da Loja</a></li>
+          <li><a href="product_details.html">Detalhes do Produto</a></li>
+        </ul>
+      </li>
+      <li><a href="blog.html">Blog</a></li>
+      <li class="menu-item-has-children">
+        <a href="">Páginas</a>
+        <ul>
+          <li><a href="about.html">Sobre</a></li>
+          <li><a href="blog_details.html">Detalhes do Blog</a></li>
+          <li><a href="cart.html">Carrinho</a></li>
+          <li><a href="checkout.html">Finalizar Compra</a></li>
+          <li><a href="success.html">Sucesso</a></li>
+          <li><a href="wishlist.html">Lista de Desejos</a></li>
+        </ul>
+      </li>
+      <li class="menu-item-has-children cs_mega_menu">
+        <a href="">MegaMenu</a>
+        <ul class="cs_mega_wrapper">
+          <li class="menu-item-has-children">
+            <a href="">Categoria Um</a>
+            <ul>
+              <li><a href="shop.html">Roupas Femininas</a></li>
+              <li><a href="shop.html">Roupas Masculinas</a></li>
+              <li><a href="shop.html">Roupas Infantis</a></li>
+              <li><a href="shop.html">Calçados (Masculino, Feminino, Infantil)</a></li>
+              <li><a href="shop.html">Acessórios (por exemplo, chapéus, cachecóis)</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="">Categoria Dois</a>
+            <ul>
+              <li><a href="shop.html">Moda Esportiva</a></li>
+              <li><a href="shop.html">Vestuário Formal</a></li>
+              <li><a href="shop.html">Vestuário Casual</a></li>
+              <li><a href="shop.html">Roupas de Exterior (Jaquetas, Casacos)</a></li>
+              <li><a href="shop.html">Roupas de Banho</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="">Categoria Três</a>
+            <ul>
+              <li><a href="shop.html">Lingerie e Roupas de Dormir</a></li>
+              <li><a href="shop.html">Moda Maternidade</a></li>
+              <li><a href="shop.html">Roupas Plus Size</a></li>
+              <li><a href="shop.html">Moda Sustentável</a></li>
+              <li><a href="shop.html">Roupas Vintage/Segunda Mão</a></li>
+            </ul>
+          </li>
+          <li class="menu-item-has-children">
+            <a href="">Categoria Quatro</a>
+            <ul>
+              <li><a href="shop.html">Roupas Esportivas</a></li>
+              <li><a href="shop.html">Roupas de Trabalho</a></li>
+              <li><a href="shop.html">Roupas de Designer</a></li>
+              <li><a href="shop.html">Coleções Sazonais</a></li>
+              <li><a href="shop.html">Fantasias e Cosplay</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="contact.html">Contato</a></li>
+    </ul>
+  </div>
+</div>
+
           <div class="cs_main_header_right">
             <div class="cs_header_action">
               <button type="button" class="cs_action_icon cs_header_search_btn">
@@ -158,9 +160,9 @@
       <div class="container">
         <div class="cs_header_search_in">
           <div class="cs_hero_search_heading">
-            <h3>What are you looking for?</h3>
-            <button class="cs_header_search_close" type="button"><i class="fa-solid fa-xmark"></i></button>
-          </div>
+  <h3>O que você está procurando?</h3>
+  <button class="cs_header_search_close" type="button"><i class="fa-solid fa-xmark"></i></button>
+</div>
           <form action="#" class="cs_header_search_form">
             <input type="text" placeholder="Search...">
             <button type="submit">
