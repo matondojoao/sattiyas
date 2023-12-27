@@ -1,6 +1,13 @@
 <script setup>
+import Hero from '@/components/template/web/home/Hero.vue'
+import { onMounted } from 'vue';
+import {main} from '@/assets/js/main.js'
+
+onMounted(() => {
+  main();
+});
 </script>
 
 <template>
- <h1>Home Page</h1>
+  <Hero />
 </template>
