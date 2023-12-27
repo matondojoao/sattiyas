@@ -5,6 +5,7 @@ import Category from '@/components/template/web/home/Category.vue'
 import FeaturedItems from '@/components/template/web/home/FeaturedItems.vue'
 import MovingTextSlider from '@/components/template/web/home/MovingTextSlider.vue'
 import Collection from '@/components/template/web/home/Collection.vue'
+import NewItemsStore from '@/components/template/web/home/NewItemsStore.vue'
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js'
 
@@ -20,4 +21,5 @@ onMounted(() => {
   <FeaturedItems />
   <MovingTextSlider />
   <Collection />
+  <NewItemsStore />
 </template>
