@@ -127,7 +127,7 @@
               <a href="#" class="cs_action_icon cs_modal_btn">
                 <i class="fa-regular fa-circle-user"></i>
               </a>
-              <a href="shop.html" class="cs_action_icon">
+              <RouterLink :to="{name:'cart'}" class="cs_action_icon">
                 <span>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_395_1018)">
@@ -148,7 +148,7 @@
                     </defs>
                   </svg>
                 </span>
-              </a>
+              </RouterLink>
             </div>
           </div>
         </div>
