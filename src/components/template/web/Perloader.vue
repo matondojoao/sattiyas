@@ -19,7 +19,7 @@
           </g>
         </g>
       </svg>
-      <span class="cs_perloader_text">Welcome to Sattiyas. Loading...</span>
+      <span class="cs_perloader_text">Bem-vindo(a) ao Sattiyas. Carregando...</span>
     </div>
   </div>
 </template>

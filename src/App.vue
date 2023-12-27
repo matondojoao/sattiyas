@@ -1,20 +1,28 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-import { onMounted } from 'vue'
 import Header from '@/components/template/web/Header.vue'
 import Footer from '@/components/template/web/Footer.vue'
 import ScrollUpButton from '@/components/template/web/ScrollUpButton.vue'
-import {main} from '@/assets/js/main.js'
+import Perloader from './components/template/web/Perloader.vue'
+import { main } from '@/assets/js/main.js'
 
-onMounted(() => {
+const showPerloader = ref(true);
+
+onMounted(async () => {
   main();
+  setTimeout(() => {
+    showPerloader.value = false;
+  }, 3000);
 });
-
 </script>
 
 <template>
-   <Header />
-   <RouterView />
-   <Footer />
-   <ScrollUpButton />
+  <div>
+    <Perloader v-if="showPerloader" />
+    <Header />
+    <RouterView />
+    <Footer />
+    <ScrollUpButton />
+  </div>
 </template>

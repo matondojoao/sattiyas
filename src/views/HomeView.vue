@@ -12,10 +12,12 @@ import SecondCollection from '@/components/template/web/home/SecondCollection.vu
 import TopSellingAccessories from '@/components/template/web/home/TopSellingAccessories.vue'
 import Newsletter from '@/components/template/web/home/Newsletter.vue'
 import Instagram from '@/components/template/web/home/Instagram.vue'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import {main} from '@/assets/js/main.js'
 
-onMounted(() => {
+const showPerloader = ref(true);
+
+onMounted(async () => {
   main();
 });
 </script>
