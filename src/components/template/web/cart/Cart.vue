@@ -1,3 +1,7 @@
+<script setup>
+  import { RouterLink } from "vue-router";
+</script>
+
 <template>
     <div class="container">
       <div class="row">
@@ -82,7 +86,7 @@
                 </tbody>
               </table>
               <div class="cs_height_30 cs_height_lg_30"></div>
-              <a href="checkout.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">Prosseguir para o Checkout</a>
+              <RouterLink :to="{name:'checkout'}" class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">Prosseguir para o Checkout</RouterLink>
             </div>
             <div class="cs_height_30 cs_height_lg_30"></div>
           </div>
