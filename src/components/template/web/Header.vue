@@ -55,7 +55,7 @@
                   <RouterLink :to="{name:'home'}">Início</RouterLink>
                 </li>
                 <li class="menu-item">
-                  <RouterLink :to="{name:'shop'}">Produtos</RouterLink>
+                  <RouterLink :to="{name:'loja'}">Produtos</RouterLink>
                 </li>
                 <li><a href="blog.html">Blog</a></li>
                 <li class="menu-item-has-children">
@@ -127,7 +127,7 @@
               <a href="#" class="cs_action_icon cs_modal_btn">
                 <i class="fa-regular fa-circle-user"></i>
               </a>
-              <RouterLink :to="{name:'cart'}" class="cs_action_icon">
+              <RouterLink :to="{name:'carrinho'}" class="cs_action_icon">
                 <span>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_395_1018)">
