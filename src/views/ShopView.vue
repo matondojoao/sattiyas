@@ -147,7 +147,7 @@ onMounted(async () => {
                                         <span>Estoque: <span class="cs_accent_color">{{ product.stock.stock_units }} em
                                                 estoque</span></span>
                                     </div>
-                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ product.price }}
+                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ product.regular_price }}
                                     </p>
                                     <p class="cs_product_desc">{{ product.description }}</p>
                                     <div class="cs_action_btns">
