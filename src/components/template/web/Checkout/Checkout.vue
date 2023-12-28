@@ -1,8 +1,12 @@
+<script setup>
+  import { RouterLink } from "vue-router";
+</script>
+
 <template>
     <div class="container">
         <div class="row">
             <div class="col-xl-7">
-                <p class="cs_checkout-alert m-0">Tem um cupom? <a href="">Clique aqui para inserir o código</a></p>
+                <p class="cs_checkout-alert m-0">Tem um cupom? <RouterLink :to="{name:'carrinho'}">Clique aqui para inserir o código</RouterLink></p>
                 <div class="cs_height_40 cs_height_lg_40"></div>
                 <h2 class="cs_checkout-title cs_fs_28">Detalhes de Cobrança</h2>
                 <div class="cs_height_45 cs_height_lg_40"></div>
