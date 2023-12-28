@@ -6,6 +6,7 @@ import { onMounted, ref } from 'vue';
 import { useProductsStore } from '@/stores/products';
 
 const products = ref([]);
+
 const fetchProducts = async () => {
     try {
         await useProductsStore().fetchProducts();
@@ -15,11 +16,23 @@ const fetchProducts = async () => {
     }
 };
 
+const calculateDiscountPercentage = (product) => {
+    if (product.regular_price > 0 && product.sale_price !== null) {
+        const discountPercentage = ((1 - product.sale_price / product.regular_price) * 100).toFixed(2);
+        return discountPercentage;
+    } else {
+        return 0;
+    }
+};
+
+const showDiscountBadge = (product) => {
+    return product.sale_price !== null && product.sale_price < product.regular_price;
+};
+
 onMounted(async () => {
     fetchProducts();
     main();
 });
-
 </script>
 
 <template>
@@ -118,8 +131,10 @@ onMounted(async () => {
                             <div class="cs_product cs_style_1">
                                 <div class="cs_product_thumb position-relative">
                                     <img :src="product.images[0].image_path" alt="Product Image" class="w-100" style="height: 379px;">
-                                    <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">
-                                        -25%</div>
+                                    <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute" v-if="product.sale_price !== null">
+                                        {{ calculateDiscountPercentage(product) }} %
+                                    </div>
+
                                     <div class="cs_cart_badge position-absolute">
                                         <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-heart"></i>
