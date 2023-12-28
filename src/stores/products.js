@@ -6,18 +6,11 @@ export const useProductsStore = defineStore('products', {
     products: [],
   }),
 
-  getters: {
-    getProducts(){
-        return this.products
-    }
-  },
-
   actions: {
     async fetchProducts() {
       try {
         const response = await  http.get('/products');
         this.products = response.data.data;
-        console.log(this.products)
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
       }
