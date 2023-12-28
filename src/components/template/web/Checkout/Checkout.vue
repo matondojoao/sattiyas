@@ -1,12 +1,19 @@
 <script setup>
-  import { RouterLink } from "vue-router";
-</script>
+import { useRouter, RouterLink } from "vue-router";
+const router = useRouter();
 
+const placeOrder = () => {
+    router.push('/sucesso');
+};
+</script>
 <template>
     <div class="container">
         <div class="row">
             <div class="col-xl-7">
-                <p class="cs_checkout-alert m-0">Tem um cupom? <RouterLink :to="{name:'carrinho'}">Clique aqui para inserir o código</RouterLink></p>
+                <p class="cs_checkout-alert m-0">Tem um cupom? <RouterLink :to="{ name: 'carrinho' }">Clique aqui para
+                        inserir
+                        o código</RouterLink>
+                </p>
                 <div class="cs_height_40 cs_height_lg_40"></div>
                 <h2 class="cs_checkout-title cs_fs_28">Detalhes de Cobrança</h2>
                 <div class="cs_height_45 cs_height_lg_40"></div>
@@ -132,7 +139,7 @@
                             experiência neste site e para outros fins descritos em nossa <a href="">política de
                                 privacidade</a>.</p>
                         <div class="cs_height_20 cs_height_lg_20"></div>
-                        <button class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">Pagar Agora</button>
+                        <button class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100" @click="placeOrder">Pagar Agora</button>
                     </div>
                     <div class="cs_height_30 cs_height_lg_30"></div>
                 </div>
@@ -140,4 +147,5 @@
         </div>
     </div>
     <div class="cs_height_90 cs_height_lg_50"></div>
-    <hr></template>
+    <hr>
+</template>
