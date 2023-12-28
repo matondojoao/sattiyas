@@ -9,8 +9,6 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div>
-        <Heading />
-        <Success />
-    </div>
+    <Heading />
+    <Success />
 </template>
