@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import http from '@/services/http.js';
 
 export const useProductsStore = defineStore('products', {
   state: () => ({
@@ -15,7 +15,7 @@ export const useProductsStore = defineStore('products', {
   actions: {
     async fetchProducts() {
       try {
-        const response = await  this.$http.get('/products');
+        const response = await  http.get('/products');
         this.products = response.data.data;
         console.log(this.products)
       } catch (error) {
