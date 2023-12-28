@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { computed } from 'vue'; 
+
 import http from '@/services/http.js';
 
 export const useProductsStore = defineStore('products', {
@@ -7,13 +9,27 @@ export const useProductsStore = defineStore('products', {
   }),
 
   actions: {
-    async fetchProducts() {
+    async fetchProducts({ name = '', min_price = '', max_price = '', categories = [], brand = '', order_by = '' } = {}) {
       try {
-        const response = await  http.get('/products');
+        const params = new URLSearchParams();
+        params.append('name', name);
+        params.append('min_price', min_price);
+        params.append('max_price', max_price);
+        categories.forEach(category => params.append('categories[]', category));
+        params.append('brand', brand);
+        params.append('order_by', order_by);
+
+        const response = await http.get('/products', { params });
         this.products = response.data.data;
       } catch (error) {
         console.error('Erro ao buscar produtos:', error);
       }
     },
   },
+
+  getters: {
+    getProducts() {
+      return this.products;
+    }
+  }  
 });

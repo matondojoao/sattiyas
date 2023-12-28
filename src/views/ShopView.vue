@@ -2,15 +2,15 @@
 import Heading from '@/components/template/web/shop/Heading.vue'
 import FilterSidebar from '@/components/template/web/shop/FilterSidebar.vue'
 import { main } from '@/assets/js/main.js'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 
-const products = ref([]);
+// const products = ref([]);
 
 const fetchProducts = async () => {
     try {
         await useProductsStore().fetchProducts();
-        products.value = useProductsStore().products;
+        products.value = useProductsStore().getProducts;
     } catch (error) {
         console.error('Erro ao buscar produtos:', error);
     }
@@ -25,6 +25,10 @@ const calculateDiscountPercentage = (product) => {
     }
 };
 
+const products = computed(() => {
+  return useProductsStore().getProducts;
+});
+
 const showDiscountBadge = (product) => {
     return product.sale_price !== null && product.sale_price < product.regular_price;
 };
@@ -32,6 +36,9 @@ const showDiscountBadge = (product) => {
 onMounted(async () => {
     fetchProducts();
     main();
+     watchEffect(() => {
+        fetchProducts();
+    });
 });
 </script>
 
