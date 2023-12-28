@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/sucesso',
       name: 'sucesso',
       component: () => import('../views/Invoice.vue')
+    },
+    {
+      path: '/lista-de-desejos',
+      name: 'lista-de-desejos',
+      component: () => import('../views/WishlistView.vue')
     }
   ]
 })
