@@ -66,7 +66,7 @@
                     <li><a href="cart.html">Carrinho</a></li>
                     <li><a href="checkout.html">Finalizar Compra</a></li>
                     <li><a href="success.html">Sucesso</a></li>
-                    <li><a href="wishlist.html">Lista de Desejos</a></li>
+                    <li><RouterLink :to="{name:'lista-de-desejos'}">Lista de Desejos</RouterLink></li>
                   </ul>
                 </li>
                 <li class="menu-item-has-children cs_mega_menu">
