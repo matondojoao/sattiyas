@@ -1,5 +1,25 @@
 <script setup>
   import { RouterLink } from "vue-router";
+  import { computed, onMounted } from "vue";
+  import { useCartStore  } from '@/stores/cart';
+
+  const fetchCategories = async () => {
+    try {
+        await useCartStore().fetchItems();
+        items.value = useCartStore().getItems;
+    } catch (error) {
+        console.error('Erro ao buscar items do carrinho:', error);
+    }
+};
+
+onMounted(async () => {
+  fetchCategories();
+});
+
+  const items = computed(()=>{
+    return useCartStore.getItems
+  });
+
 </script>
 
 <template>
@@ -18,42 +38,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr v-for="item in items" :key="item.product_id">
                   <td>
                     <div class="cs_cart_table_media">
-                      <img src="@/assets/img/cart-product-1.jpeg" alt="Thumb">
-                      <h3>Camiseta masculina de algodão preto puro</h3>
+                      <img :src="item.first_image" alt="Thumb">
+                      <h3>{{ item.product_name }}</h3>
                     </div>
                   </td>
-                  <td>$205.00</td>
+                  <td>{{ item.price }}</td>
                   <td>
                     <div class="cs_quantity">
                       <button class="cs_quantity_btn cs_increment"><i class="fa-solid fa-angle-up"></i></button>
-                      <span class="cs_quantity_input">1</span>
+                      <span class="cs_quantity_input">{{ item.quantity }}</span>
                       <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
                     </div>
                   </td>
-                  <td>$205.00</td>
-                  <td class="text-center">
-                    <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="cs_cart_table_media">
-                      <img src="@/assets/img/cart-product-2.jpeg" alt="Thumb">
-                      <h3>Roupa de dormir em seda satinada</h3>
-                    </div>
-                  </td>
-                  <td>$550.00</td>
-                  <td>
-                    <div class="cs_quantity">
-                      <button class="cs_quantity_btn cs_increment"><i class="fa-solid fa-angle-up"></i></button>
-                      <span class="cs_quantity_input">1</span>
-                      <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
-                    </div>
-                  </td>
-                  <td>$550.00</td>
+                  <td>{{ item.total }}</td>
                   <td class="text-center">
                     <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
                   </td>

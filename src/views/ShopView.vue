@@ -4,8 +4,15 @@ import FilterSidebar from '@/components/template/web/shop/FilterSidebar.vue'
 import { main } from '@/assets/js/main.js'
 import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
+import { useCartStore  } from '@/stores/cart';
+import Perloader from '@/components/template/web/Perloader.vue'
 
-// const products = ref([]);
+
+const showPerloader = ref(true);
+const cart = useCartStore()
+const addToCart = (product) => {
+    cart.addProductToCart({ product, quantity: 1 });
+};
 
 const fetchProducts = async () => {
     try {
@@ -36,13 +43,14 @@ const showDiscountBadge = (product) => {
 onMounted(async () => {
     fetchProducts();
     main();
-     watchEffect(() => {
-        fetchProducts();
-    });
+    setTimeout(() => {
+       showPerloader.value = false;
+  }, 3000);
 });
 </script>
 
 <template>
+    <Perloader v-if="showPerloader" />
     <Heading />
     <section>
         <div class="cs_height_140 cs_height_lg_80"></div>
@@ -150,9 +158,10 @@ onMounted(async () => {
                                             <i class="fa-regular fa-eye"></i>
                                         </a>
                                     </div>
-                                    <a href="carrinho.html"
+
+                                    <button @click="addToCart(product.id)"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar
-                                        ao Carrinho</a>
+                                        ao Carrinho</button>
 
                                 </div>
                                 <div class="cs_product_info text-center">

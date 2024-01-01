@@ -14,15 +14,20 @@ import Newsletter from '@/components/template/web/home/Newsletter.vue'
 import Instagram from '@/components/template/web/home/Instagram.vue'
 import { onMounted, ref } from 'vue';
 import {main} from '@/assets/js/main.js'
+import Perloader from '@/components/template/web/Perloader.vue'
 
 const showPerloader = ref(true);
 
 onMounted(async () => {
   main();
+  setTimeout(() => {
+       showPerloader.value = false;
+  }, 3000);
 });
 </script>
 
 <template>
+  <Perloader v-if="showPerloader" />
   <Hero />
   <IconBoxes />
   <Category />
