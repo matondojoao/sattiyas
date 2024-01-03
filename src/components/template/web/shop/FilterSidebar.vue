@@ -4,10 +4,12 @@ import { useCategoryStore } from '@/stores/categories.js';
 import { useProductsStore } from '@/stores/products';
 import { useBrandStore } from '@/stores/brands';
 import { useSizeStore } from '@/stores/sizes';
+import { useColorStore } from '@/stores/colors';
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js';
 
 const categories = ref([]);
+const colors = ref([]);
 const brands = ref([]);
 const sizes = ref([]);
 const selectedCategoryIds = ref([]);
@@ -27,6 +29,15 @@ const fetchBrans = async () =>{
         brands.value = useBrandStore().brands
     } catch (error) {
         console.error('Erro ao buscar marcas:', error);
+    }
+}
+
+const fetchColors = async () =>{
+    try {
+        await useColorStore().fetchColors();
+        colors.value = useColorStore().colors
+    } catch (error) {
+        console.error('Erro ao buscar cores:', error);
     }
 }
 
@@ -56,7 +67,8 @@ onMounted(async()=>{
     main();
     await fetchCategories();
     await fetchBrans();
-    await fetchSizes()
+    await fetchSizes();
+    await fetchColors()
 })
 
 
@@ -108,32 +120,11 @@ onMounted(async()=>{
                 Cor <span></span>
             </h3>
             <ul class="cs_color_filter_list cs_mp0">
-                <li>
+                <li v-for="color in colors" :key="color.id">
                     <div class="cs_color_filter">
                         <input type="radio" name="color" />
-                        <span class="cs_color_filter_circle cs_accent_bg"></span>
-                        <span class="cs_color_text">Red</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="cs_color_filter">
-                        <input type="radio" name="color" />
-                        <span class="cs_color_filter_circle cs_secondary_bg"></span>
-                        <span class="cs_color_text">Gray</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="cs_color_filter">
-                        <input type="radio" name="color" />
-                        <span class="cs_color_filter_circle cs_primary_bg"></span>
-                        <span class="cs_color_text">Black</span>
-                    </div>
-                </li>
-                <li>
-                    <div class="cs_color_filter">
-                        <input type="radio" name="color" />
-                        <span class="cs_color_filter_circle cs_white_bg"></span>
-                        <span class="cs_color_text">White</span>
+                        <span class="cs_color_filter_circle" :class="color.class"></span>
+                        <span class="cs_color_text">{{ color.name }}</span>
                     </div>
                 </li>
             </ul>
