@@ -42,8 +42,8 @@ onMounted(async () => {
             <ol class="cs_single_product_breadcrumb breadcrumb">
    <li class="breadcrumb-item"><a href="#">Início</a></li>
    <li class="breadcrumb-item"><a href="#">Loja</a></li>
-   <li class="breadcrumb-item"><a href="#">{{ product.categories[0].name }}</a></li>
-   <li class="breadcrumb-item active">{{ product.name }}</li>
+   <li class="breadcrumb-item"><a href="#">{{ product?.categories[0]?.name }}</a></li>
+   <li class="breadcrumb-item active">{{ product?.name }}</li>
 </ol>
 
          </nav>
@@ -209,10 +209,11 @@ onMounted(async () => {
          <hr>
          <div class="cs_product_meta_info">
             <ul class="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">
-               <li><a href="#tab_1">Description</a></li>
-               <li><a href="#tab_2">Additional information</a></li>
-               <li><a href="#tab_3">Size Guide</a></li>
-               <li class="active"><a href="#tab_4">Review (1)</a></li>
+               <li><a href="#tab_1">Descrição</a></li>
+<li><a href="#tab_2">Informações adicionais</a></li>
+<li><a href="#tab_3">Guia de tamanho</a></li>
+<li class="active"><a href="#tab_4">Avaliação ()</a></li>
+
             </ul>
             <div class="cs_tabs">
                <div class="cs_tab" id="tab_1">
