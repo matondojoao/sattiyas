@@ -4,7 +4,7 @@ import FilterSidebar from '@/components/template/web/shop/FilterSidebar.vue'
 import { main } from '@/assets/js/main.js'
 import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
-import { useCartStore  } from '@/stores/cart';
+import { useCartStore } from '@/stores/cart';
 import Perloader from '@/components/template/web/Perloader.vue'
 
 
@@ -33,19 +33,25 @@ const calculateDiscountPercentage = (product) => {
 };
 
 const products = computed(() => {
-  return useProductsStore().getProducts;
+    return useProductsStore().getProducts;
 });
 
 const showDiscountBadge = (product) => {
     return product.sale_price !== null && product.sale_price < product.regular_price;
 };
 
+const order_by = ref("");
+
+const orderProducts = async ()=>{
+    const order_by_value = order_by.value
+    await useProductsStore().fetchProducts({order_by:order_by_value})
+}
 onMounted(async () => {
     fetchProducts();
     main();
     setTimeout(() => {
-       showPerloader.value = false;
-  }, 3000);
+        showPerloader.value = false;
+    }, 3000);
 });
 </script>
 
@@ -90,10 +96,10 @@ onMounted(async () => {
                         </div>
                         <div class="cs_sort_wrap">
                             <div class="cs_sort">
-                                <select>
-                                    <option selected>Ordenar por Mais Recente</option>
-                                    <option value="1">Ordenar por Menor Preço</option>
-                                    <option value="2">Ordenar por Maior Preço</option>
+                                <select v-model="order_by" @change="orderProducts">
+                                    <option value="">Ordenar por Mais Recente</option>
+                                    <option value="low_to_high">Ordenar por Menor Preço</option>
+                                    <option value="high_to_low">Ordenar por Maior Preço</option>
                                 </select>
 
                             </div>
@@ -145,8 +151,10 @@ onMounted(async () => {
                         <div class="cs_product_col" v-for="product in products" :key="product.id">
                             <div class="cs_product cs_style_1">
                                 <div class="cs_product_thumb position-relative">
-                                    <img :src="product.images[0].image_path" alt="Product Image" class="w-100" style="height: 379px;">
-                                    <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute" v-if="product.sale_price !== null">
+                                    <img :src="product.images[0].image_path" alt="Product Image" class="w-100"
+                                        style="height: 379px;">
+                                    <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute"
+                                        v-if="product.sale_price !== null">
                                         {{ calculateDiscountPercentage(product) }} %
                                     </div>
 
@@ -160,8 +168,8 @@ onMounted(async () => {
                                     </div>
 
                                     <button @click="addToCart(product.id)"
-        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
-        style="border: none;">Adicionar ao Carrinho</button>
+                                        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
+                                        style="border: none;">Adicionar ao Carrinho</button>
 
 
                                 </div>
@@ -179,7 +187,8 @@ onMounted(async () => {
                                         <span>Estoque: <span class="cs_accent_color">{{ product.stock.stock_units }} em
                                                 estoque</span></span>
                                     </div>
-                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ product.regular_price }}
+                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{
+                                        product.regular_price }}
                                     </p>
                                     <p class="cs_product_desc">{{ product.description }}</p>
                                     <div class="cs_action_btns">
