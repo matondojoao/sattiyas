@@ -160,8 +160,9 @@ onMounted(async () => {
                                     </div>
 
                                     <button @click="addToCart(product.id)"
-                                        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar
-                                        ao Carrinho</button>
+        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
+        style="border: none;">Adicionar ao Carrinho</button>
+
 
                                 </div>
                                 <div class="cs_product_info text-center">
