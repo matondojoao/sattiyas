@@ -11,7 +11,6 @@ export const useCategoryStore = defineStore('categories',{
           try {
             const response = await  http.get('/categories');
             this.categories = response.data.data;
-            console.log(this.categories)
           } catch (error) {
             console.error('Erro ao buscar categorias:', error);
           }
