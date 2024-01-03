@@ -8,7 +8,7 @@ const showPerloader = ref(true);
 
 onMounted(async () => {
     main();
-    setTimeout(() => {
+     setTimeout(() => {
        showPerloader.value = false;
   }, 3000);
 });

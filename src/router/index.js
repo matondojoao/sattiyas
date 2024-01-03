@@ -38,6 +38,11 @@ const router = createRouter({
       path: '/lista-de-desejos',
       name: 'lista-de-desejos',
       component: () => import('../views/WishlistView.vue')
+    },
+    {
+      path: '/produto/:slug',
+      name: 'produto',
+      component: () => import('../views/ProductDetailsView.vue')
     }
   ]
 })

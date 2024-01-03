@@ -6,6 +6,7 @@ import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import { useCartStore } from '@/stores/cart';
 import Perloader from '@/components/template/web/Perloader.vue'
+import { RouterLink } from 'vue-router'
 
 
 const showPerloader = ref(true);
@@ -175,7 +176,7 @@ onMounted(async () => {
                                 </div>
                                 <div class="cs_product_info text-center">
                                     <h3 class="cs_product_title cs_fs_21 cs_medium">
-                                        <a href="product_details.html">{{ product.name }}</a>
+                                        <RouterLink :to="{name:'produto', params:{slug: product.slug}}">{{ product.name }}</RouterLink>
                                     </h3>
                                     <div class="cs_single_product_review">
                                         <div class="cs_rating_container">
