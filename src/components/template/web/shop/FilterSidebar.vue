@@ -2,8 +2,12 @@
 import { ref } from 'vue';
 import { useCategoryStore } from '@/stores/categories.js';
 import { useProductsStore } from '@/stores/products';
+import { useBrandStore } from '@/stores/brands';
+import { onMounted } from 'vue';
+import {main} from '@/assets/js/main.js';
 
 const categories = ref([]);
+const brands = ref([]);
 const selectedCategoryIds = ref([]);
 
 const fetchCategories = async () => {
@@ -14,6 +18,15 @@ const fetchCategories = async () => {
     console.error('Erro ao buscar categorias:', error);
   }
 };
+
+const fetchBrans = async () =>{
+    try {
+        await useBrandStore().fetchBrands();
+        brands.value = useBrandStore().brands
+    } catch (error) {
+        console.error('Erro ao buscar marcas:', error);
+    }
+}
 
 const handleCheckboxChange = async (categoryId) => {
   console.log('Before:', selectedCategoryIds.value);
@@ -31,11 +44,12 @@ const handleCheckboxChange = async (categoryId) => {
   console.log('After:', selectedCategoryIds.value);
 };
 
-const main = async () => {
-  await fetchCategories();
-};
+onMounted(async()=>{
+    main();
+    await fetchCategories();
+    await fetchBrans()
+})
 
-main();
 
 </script>
 
@@ -143,37 +157,9 @@ main();
                 Marca <span></span>
             </h3>
             <ul class="cs_brand_filter_list cs_mp0">
-                <li>
+                <li v-for="brand in brands" :key="brand.id">
                     <input type="radio" name="brand" />
-                    <span>Flora</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Fashione</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Zara</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Burino</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Celvine</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Denima</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Yooze</span>
-                </li>
-                <li>
-                    <input type="radio" name="brand" />
-                    <span>Wisete</span>
+                    <span>{{ brand.name }}</span>
                 </li>
             </ul>
         </div>
