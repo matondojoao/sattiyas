@@ -3,11 +3,13 @@ import { ref } from 'vue';
 import { useCategoryStore } from '@/stores/categories.js';
 import { useProductsStore } from '@/stores/products';
 import { useBrandStore } from '@/stores/brands';
+import { useSizeStore } from '@/stores/sizes';
 import { onMounted } from 'vue';
 import {main} from '@/assets/js/main.js';
 
 const categories = ref([]);
 const brands = ref([]);
+const sizes = ref([]);
 const selectedCategoryIds = ref([]);
 
 const fetchCategories = async () => {
@@ -28,8 +30,16 @@ const fetchBrans = async () =>{
     }
 }
 
+const fetchSizes = async () =>{
+    try {
+        await useSizeStore().fetchSizes();
+        sizes.value = useSizeStore().sizes
+    } catch (error) {
+        console.error('Erro ao buscar tamanhos:', error);
+    }
+}
+
 const handleCheckboxChange = async (categoryId) => {
-  console.log('Before:', selectedCategoryIds.value);
 
   selectedCategoryIds.value = selectedCategoryIds.value.includes(categoryId)
     ? selectedCategoryIds.value.filter(id => id !== categoryId)
@@ -40,14 +50,13 @@ const handleCheckboxChange = async (categoryId) => {
   } else {
     await useProductsStore().fetchProducts({ categories: selectedCategoryIds.value });
   }
-
-  console.log('After:', selectedCategoryIds.value);
 };
 
 onMounted(async()=>{
     main();
     await fetchCategories();
-    await fetchBrans()
+    await fetchBrans();
+    await fetchSizes()
 })
 
 
@@ -134,21 +143,9 @@ onMounted(async()=>{
                 Tamanho <span></span>
             </h3>
             <ul class="cs_size_filter_list cs_mp0">
-                <li>
+                <li v-for="size in sizes" :key="size.id">
                     <input type="radio" name="size" />
-                    <span>S</span>
-                </li>
-                <li>
-                    <input type="radio" name="size" />
-                    <span>M</span>
-                </li>
-                <li>
-                    <input type="radio" name="size" />
-                    <span>L</span>
-                </li>
-                <li>
-                    <input type="radio" name="size" />
-                    <span>XL</span>
+                    <span>{{ size.name }}</span>
                 </li>
             </ul>
         </div>
