@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
+import { main } from '@/assets/js/main.js'
 
 const showPerloader = ref(true);
 
@@ -22,6 +23,7 @@ const fechProduct = async () =>{
    }
 }
 onMounted(async () => {
+   main();
    fechProduct();
    setTimeout(() => {
       showPerloader.value = false;
@@ -38,11 +40,12 @@ onMounted(async () => {
       <div class="container">
          <nav aria-label="breadcrumb">
             <ol class="cs_single_product_breadcrumb breadcrumb">
-               <li class="breadcrumb-item"><a href="#">Home</a></li>
-               <li class="breadcrumb-item"><a href="#">Shop</a></li>
-               <li class="breadcrumb-item"><a href="#">Men</a></li>
-               <li class="breadcrumb-item active">T-Shirt</li>
-            </ol>
+   <li class="breadcrumb-item"><a href="#">Início</a></li>
+   <li class="breadcrumb-item"><a href="#">Loja</a></li>
+   <li class="breadcrumb-item"><a href="#">{{ product.categories[0].name }}</a></li>
+   <li class="breadcrumb-item active">{{ product.name }}</li>
+</ol>
+
          </nav>
          <div class="row">
             <div class="col-xl-7">
