@@ -11,7 +11,6 @@ export const useBrandStore =  defineStore('brands',{
            try {
                const response = await http.get('/brands')
                this.brands = response.data.data
-               console.log(response.data)
            } catch (error) {
                console.error('Erro ao buscar marcas:', error);
            }
