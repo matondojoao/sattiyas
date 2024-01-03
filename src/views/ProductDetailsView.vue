@@ -11,13 +11,13 @@ const route = useRoute();
 const slug = ref(route.params.slug);
 const product = ref(null)
 const relatedProducts = ref([])
+const productImages = ref([])
 
-const fechProduct = async () =>{
+const fechProduct = async () => {
    try {
       const response = await http.get(`/product/${slug.value}`)
-      product.value=response.data.data.product
-      relatedProducts.value=response.data.data.relatedProducts
-      console.log(product.value)
+      product.value = response.data.data.product
+      relatedProducts.value = response.data.data.relatedProducts
    } catch (error) {
       console.error('Erro ao buscar produto:', error);
    }
@@ -40,69 +40,27 @@ onMounted(async () => {
       <div class="container">
          <nav aria-label="breadcrumb">
             <ol class="cs_single_product_breadcrumb breadcrumb">
-   <li class="breadcrumb-item"><a href="#">Início</a></li>
-   <li class="breadcrumb-item"><a href="#">Loja</a></li>
-   <li class="breadcrumb-item"><a href="#">{{ product?.categories[0]?.name }}</a></li>
-   <li class="breadcrumb-item active">{{ product?.name }}</li>
-</ol>
+               <li class="breadcrumb-item"><a href="#">Início</a></li>
+               <li class="breadcrumb-item"><a href="#">Loja</a></li>
+               <li class="breadcrumb-item"><a href="#">{{ product?.categories[0]?.name }}</a></li>
+               <li class="breadcrumb-item active">{{ product?.name }}</li>
+            </ol>
 
          </nav>
          <div class="row">
             <div class="col-xl-7">
-               <div class="row">
+               <div class="row" v-if="product">
                   <div class="col-3">
                      <div class="cs_single_product_nav slick-slider">
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb1.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb2.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb3.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb4.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb1.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb2.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb3.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_mini">
-                           <img src="@/assets/img/thumb4.png" alt="Thumb">
+                        <div class="cs_single_product_thumb_mini" v-for="image in product?.images" :key="image?.id">
+                           <img :src="image?.image_path">
                         </div>
                      </div>
                   </div>
                   <div class="col-9">
                      <div class="cs_single_product_thumb slick-slider">
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb1_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb2_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb3_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb4_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb1_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb2_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb3_lg.png" alt="Thumb">
-                        </div>
-                        <div class="cs_single_product_thumb_item">
-                           <img src="@/assets/img/thumb4_lg.png" alt="Thumb">
+                        <div class="cs_single_product_thumb_item" v-for="image in product?.images" :key="image.id">
+                           <img :src="image?.image_path" alt="Thumb">
                         </div>
                      </div>
                   </div>
@@ -118,90 +76,73 @@ onMounted(async () => {
                         </div>
                      </div>
                      <span>(5)</span>
-                     <span>Estoque: <span class="cs_accent_color">{{ product?.stock?.stock_units }} em estoque</span></span>
+                     <span>Estoque: <span class="cs_accent_color">{{ product?.stock?.stock_units }} em
+                           estoque</span></span>
                   </div>
-                  <h4 class="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">Preço: {{ product?.regular_price }}</h4>
+                  <h4 class="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">Preço: {{
+                     product?.regular_price }}</h4>
                   <hr>
                   <div class="cs_single_product_details_text">
                      <p class="mb-0">{{ product?.body }}</p>
                   </div>
                   <div class="cs_single_product_size">
-                     <h4 class="cs_fs_16 cs_medium">Size</h4>
-                     <ul class="cs_size_filter_list cs_mp0">
-                        <li>
-                           <input type="radio" name="size">
-                           <span>S</span>
-                        </li>
-                        <li>
-                           <input type="radio" name="size">
-                           <span>M</span>
-                        </li>
-                        <li>
-                           <input type="radio" name="size">
-                           <span>L</span>
-                        </li>
-                        <li>
-                           <input type="radio" name="size">
-                           <span>XL</span>
-                        </li>
-                     </ul>
-                  </div>
-                  <div class="cs_single_product_color ">
-                     <h4 class="cs_fs_16 cs_medium">Color</h4>
-                     <ul class="cs_color_filter_list cs_type_1 cs_mp0">
-                        <li>
-                           <div class="cs_color_filter">
-                              <input type="radio" name="color">
-                              <span class="cs_color_filter_circle cs_accent_bg"></span>
-                              <span class="cs_color_text">Red</span>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="cs_color_filter">
-                              <input type="radio" name="color">
-                              <span class="cs_color_filter_circle cs_secondary_bg"></span>
-                              <span class="cs_color_text">Gray</span>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="cs_color_filter">
-                              <input type="radio" name="color">
-                              <span class="cs_color_filter_circle cs_primary_bg"></span>
-                              <span class="cs_color_text">Black</span>
-                           </div>
-                        </li>
-                        <li>
-                           <div class="cs_color_filter">
-                              <input type="radio" name="color">
-                              <span class="cs_color_filter_circle cs_white_bg"></span>
-                              <span class="cs_color_text">White</span>
-                           </div>
-                        </li>
-                     </ul>
-                  </div>
+    <h4 class="cs_fs_16 cs_medium">Tamanho</h4>
+    <ul class="cs_size_filter_list cs_mp0">
+        <li>
+            <input type="radio" name="size">
+            <span>P</span>
+        </li>
+        <li>
+            <input type="radio" name="size">
+            <span>M</span>
+        </li>
+        <li>
+            <input type="radio" name="size">
+            <span>G</span>
+        </li>
+        <li>
+            <input type="radio" name="size">
+            <span>GG</span>
+        </li>
+    </ul>
+</div>
+<div class="cs_single_product_color">
+    <h4 class="cs_fs_16 cs_medium">Cor</h4>
+    <ul class="cs_color_filter_list cs_type_1 cs_mp0">
+        <li>
+            <div class="cs_color_filter">
+                <input type="radio" name="color">
+                <span class="cs_color_filter_circle cs_accent_bg"></span>
+                <span class="cs_color_text">Azul</span>
+            </div>
+        </li>
+    </ul>
+</div>
+
                   <div class="cs_action_btns">
                      <div class="cs_quantity">
                         <button class="cs_quantity_btn cs_increment"><i class="fa-solid fa-angle-up"></i></button>
                         <span class="cs_quantity_input">1</span>
                         <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
                      </div>
-                     <a href="#" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Add to Cart</a>
+                     <a href="#" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
                      <button class="cs_heart_btn"><i class="fa-regular fa-heart"></i></button>
                   </div>
                   <ul class="cs_single_product_info">
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">SKU: </b>0215552
+                        <b class="cs_medium">SKU: </b>{{ product?.sku }}
                      </li>
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Categories: </b>T-Shirt
+                        <b class="cs_medium">Categorias: </b>Vestido
                      </li>
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Tags: </b>Men, T-Shirt, Clothing
+                        <b class="cs_medium">Tags: </b>Homens, Camiseta, Vestuário
                      </li>
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Brand: </b>Levine
+                        <b class="cs_medium">Marca: </b>Levine
                      </li>
                   </ul>
+
                </div>
             </div>
          </div>
@@ -210,27 +151,28 @@ onMounted(async () => {
          <div class="cs_product_meta_info">
             <ul class="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">
                <li><a href="#tab_1">Descrição</a></li>
-<li><a href="#tab_2">Informações adicionais</a></li>
-<li class="active"><a href="#tab_4">Avaliação ({{ product?.reviews?.length }})</a></li>
+               <li><a href="#tab_2">Informações adicionais</a></li>
+               <li class="active"><a href="#tab_4">Avaliação ({{ product?.reviews?.length }})</a></li>
 
             </ul>
             <div class="cs_tabs">
                <div class="cs_tab" id="tab_1">
-                 {{ product.description }}
+                  {{ product?.description }}
                </div>
                <div class="cs_tab" id="tab_2">
                   <table class="m-0">
                      <tbody>
                         <tr>
-                           <td>Color</td>
-                           <td>Blue, Gray, Green, Red, Yellow</td>
+                           <td>Cor</td>
+                           <td>Azul, Cinza, Verde, Vermelho, Amarelo</td>
                         </tr>
                         <tr>
-                           <td>Size</td>
-                           <td>Large, Medium, Small</td>
+                           <td>Tamanho</td>
+                           <td>Grande, Médio, Pequeno</td>
                         </tr>
                      </tbody>
                   </table>
+
                   <hr>
                </div>
                <div class="cs_tab active" id="tab_4">
@@ -283,7 +225,8 @@ onMounted(async () => {
                         <div class="form_check">
                            <input class="form-check-input" type="checkbox">
                            <label class="form-check-label m-0">
-                              Ao usar este formulário, você concorda com o armazenamento e manuseio dos seus dados por este site. *
+                              Ao usar este formulário, você concorda com o armazenamento e manuseio dos seus dados por este
+                              site. *
                            </label>
                         </div>
                      </div>
@@ -294,7 +237,7 @@ onMounted(async () => {
 
                </div>
             </div>
-            <!-- .cs_tabs -->
          </div>
       </div>
-</section></template>
+   </section>
+</template>

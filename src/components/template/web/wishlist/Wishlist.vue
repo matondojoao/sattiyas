@@ -23,7 +23,7 @@ import { RouterLink } from "vue-router";
                 <h3>Camiseta masculina de algodão preto puro</h3>
               </div>
             </td>
-            <td>$300.00</td>
+            <td>300.00</td>
             <td>Em estoque</td>
             <td class="text-center">
               <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
@@ -38,7 +38,7 @@ import { RouterLink } from "vue-router";
                 <h3>Roupa de dormir de seda acetinada</h3>
               </div>
             </td>
-            <td>$300.00</td>
+            <td>300.00</td>
             <td>Em estoque</td>
             <td class="text-center">
               <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
@@ -53,7 +53,7 @@ import { RouterLink } from "vue-router";
                 <h3>Vestido feminino deslumbrante</h3>
               </div>
             </td>
-            <td>$300.00</td>
+            <td>300.00</td>
             <td>Em estoque</td>
             <td class="text-center">
               <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>

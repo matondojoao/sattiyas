@@ -58,62 +58,6 @@
                   <RouterLink :to="{name:'loja'}">Produtos</RouterLink>
                 </li>
                 <li><a href="blog.html">Blog</a></li>
-                <li class="menu-item-has-children">
-                  <a href="">Páginas</a>
-                  <ul>
-                    <li><a href="about.html">Sobre</a></li>
-                    <li><a href="blog_details.html">Detalhes do Blog</a></li>
-                    <li><a href="cart.html">Carrinho</a></li>
-                    <li><a href="checkout.html">Finalizar Compra</a></li>
-                    <li><a href="success.html">Sucesso</a></li>
-                    <li><RouterLink :to="{name:'lista-de-desejos'}">Lista de Desejos</RouterLink></li>
-                  </ul>
-                </li>
-                <li class="menu-item-has-children cs_mega_menu">
-                  <a href="">MegaMenu</a>
-                  <ul class="cs_mega_wrapper">
-                    <li class="menu-item-has-children">
-                      <a href="">Categoria Um</a>
-                      <ul>
-                        <li><a href="shop.html">Roupas Femininas</a></li>
-                        <li><a href="shop.html">Roupas Masculinas</a></li>
-                        <li><a href="shop.html">Roupas Infantis</a></li>
-                        <li><a href="shop.html">Calçados (Masculino, Feminino, Infantil)</a></li>
-                        <li><a href="shop.html">Acessórios (por exemplo, chapéus, cachecóis)</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Categoria Dois</a>
-                      <ul>
-                        <li><a href="shop.html">Moda Esportiva</a></li>
-                        <li><a href="shop.html">Vestuário Formal</a></li>
-                        <li><a href="shop.html">Vestuário Casual</a></li>
-                        <li><a href="shop.html">Roupas de Exterior (Jaquetas, Casacos)</a></li>
-                        <li><a href="shop.html">Roupas de Banho</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Categoria Três</a>
-                      <ul>
-                        <li><a href="shop.html">Lingerie e Roupas de Dormir</a></li>
-                        <li><a href="shop.html">Moda Maternidade</a></li>
-                        <li><a href="shop.html">Roupas Plus Size</a></li>
-                        <li><a href="shop.html">Moda Sustentável</a></li>
-                        <li><a href="shop.html">Roupas Vintage/Segunda Mão</a></li>
-                      </ul>
-                    </li>
-                    <li class="menu-item-has-children">
-                      <a href="">Categoria Quatro</a>
-                      <ul>
-                        <li><a href="shop.html">Roupas Esportivas</a></li>
-                        <li><a href="shop.html">Roupas de Trabalho</a></li>
-                        <li><a href="shop.html">Roupas de Designer</a></li>
-                        <li><a href="shop.html">Coleções Sazonais</a></li>
-                        <li><a href="shop.html">Fantasias e Cosplay</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
                 <li><a href="contact.html">Contato</a></li>
               </ul>
             </div>
