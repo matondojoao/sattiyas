@@ -211,22 +211,12 @@ onMounted(async () => {
             <ul class="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">
                <li><a href="#tab_1">Descrição</a></li>
 <li><a href="#tab_2">Informações adicionais</a></li>
-<li><a href="#tab_3">Guia de tamanho</a></li>
-<li class="active"><a href="#tab_4">Avaliação ()</a></li>
+<li class="active"><a href="#tab_4">Avaliação ({{ product?.reviews?.length }})</a></li>
 
             </ul>
             <div class="cs_tabs">
                <div class="cs_tab" id="tab_1">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum
-                  tincidunt.
-                  Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                  himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non
-                  metus.
-                  Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut
-                  turpis
-                  pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec
-                  erat
-                  pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.
+                 {{ product.description }}
                </div>
                <div class="cs_tab" id="tab_2">
                   <table class="m-0">
@@ -243,48 +233,33 @@ onMounted(async () => {
                   </table>
                   <hr>
                </div>
-               <div class="cs_tab" id="tab_3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis orci ac odio dictum
-                  tincidunt.
-                  Donec ut metus leo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                  himenaeos. Sed luctus, dui eu sagittis sodales, nulla nibh sagittis augue, vel porttitor diam enim non
-                  metus.
-                  Vestibulum aliquam augue neque. Phasellus tincidunt odio eget ullamcorper efficitur. Cras placerat ut
-                  turpis
-                  pellentesque vulputate. Nam sed consequat tortor. Curabitur finibus sapien dolor. Ut eleifend tellus nec
-                  erat
-                  pulvinar dignissim. Nam non arcu purus. Vivamus et massa massa.
-               </div>
                <div class="cs_tab active" id="tab_4">
                   <ul class="cs_client_review_list cs_mp0">
                      <li>
-                        <div class="cs_client_review">
+                        <div class="cs_client_review" v-for="review in product?.reviews">
                            <div class="cs_review_media">
-                              <div class="cs_review_media_thumb"><img src="@/assets/img/avatar.png" alt="Avatar"></div>
+                              <div class="cs_review_media_thumb">
+                                 <img :src="review.user.photo_path" alt="Avatar" v-if="review.user.photo_path">
+                                 <img src="@/assets/img/avatar.png" alt="Avatar" v-else>
+                              </div>
                               <div class="cs_review_media_right">
                                  <div class="cs_rating_container">
-                                    <div class="cs_rating cs_size_sm" data-rating="5">
+                                    <div class="cs_rating cs_size_sm" :data-rating="review.rating">
                                        <div class="cs_rating_percentage"></div>
                                     </div>
                                  </div>
-                                 <p class="mb-0 cs_primary_color cs_semibold">Zhon Abony</p>
+                                 <p class="mb-0 cs_primary_color cs_semibold">{{ review.user.name }}</p>
                               </div>
-                              <p class="cs_review_posted_by">August 12, 2023</p>
+                              <p class="cs_review_posted_by">{{ review.created_at }}</p>
                            </div>
-                           <p class="cs_review_text">I recently purchased the Arino T-shirts and I'm thoroughly impressed.
-                              The
-                              sound quality is exceptional, the wireless connectivity is seamless, and the noise
-                              cancellation
-                              technology is a <br> standout feature. They're a bit pricey, but well worth the investment.
-                              Highly
-                              recommend.</p>
+                           <p class="cs_review_text">{{ review.comment }}</p>
                         </div>
                      </li>
                   </ul>
-                  <p class="m-0">Your email address will not be published. Required fields are marked *</p>
+                  <p class="m-0">Seu endereço de e-mail não será publicado. Campos obrigatórios estão marcados com *</p>
                   <div class="cs_height_20 cs_height_lg_20"></div>
                   <div class="cs_input_rating_wrap">
-                     <p>Your rating *</p>
+                     <p>Sua avaliação *</p>
                      <div class="cs_input_rating cs_accent_color" data-rating="0">
                         <i class="fa-regular fa-star"></i>
                         <i class="fa-regular fa-star"></i>
@@ -296,26 +271,27 @@ onMounted(async () => {
                   <div class="cs_height_20 cs_height_lg_22"></div>
                   <form class="row cs_review_form cs_gap_y_24">
                      <div class="col-lg-12">
-                        <textarea rows="3" class="cs_form_field" placeholder="Write your review *"></textarea>
+                        <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *"></textarea>
                      </div>
                      <div class="col-lg-6">
-                        <input type="text" class="cs_form_field" placeholder="Your name *">
+                        <input type="text" class="cs_form_field" placeholder="Seu nome *">
                      </div>
                      <div class="col-lg-6">
-                        <input type="text" class="cs_form_field" placeholder="Your email *">
+                        <input type="text" class="cs_form_field" placeholder="Seu e-mail *">
                      </div>
                      <div class="col-lg-12">
                         <div class="form_check">
                            <input class="form-check-input" type="checkbox">
                            <label class="form-check-label m-0">
-                              By using this form you agree with the storage and handling of your data by this website. *
+                              Ao usar este formulário, você concorda com o armazenamento e manuseio dos seus dados por este site. *
                            </label>
                         </div>
                      </div>
                      <div class="col-lg-12">
-                        <button class="cs_btn cs_style_1 cs_fs_16 cs_medium" type="submit">Submit Now</button>
+                        <button class="cs_btn cs_style_1 cs_fs_16 cs_medium" type="submit">Enviar agora</button>
                      </div>
                   </form>
+
                </div>
             </div>
             <!-- .cs_tabs -->
