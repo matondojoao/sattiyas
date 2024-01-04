@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
@@ -18,10 +18,13 @@ const fechProduct = async () => {
       const response = await http.get(`/product/${slug.value}`)
       product.value = response.data.data.product
       relatedProducts.value = response.data.data.relatedProducts
+      console.log('produtos relacionados: '+ relatedProducts.value)
    } catch (error) {
       console.error('Erro ao buscar produto:', error);
    }
 }
+
+
 onMounted(async () => {
    main();
    fechProduct();
@@ -29,6 +32,25 @@ onMounted(async () => {
       showPerloader.value = false;
    }, 3000);
 });
+
+const formattedCategories = computed(() => {
+      if(product.value){
+         return product.value.categories.map(category => category.name).join(', ');
+      }
+});
+
+const formattedColors = computed(() => {
+      if(product.value){
+         return product.value.colors.map(color => color.name).join(', ');
+      }
+});
+
+const formattedSizes = computed(() => {
+      if(product.value){
+         return product.value.sizes.map(size => size.name).join(', ');
+      }
+});
+
 </script>
 
 
@@ -86,39 +108,26 @@ onMounted(async () => {
                      <p class="mb-0">{{ product?.body }}</p>
                   </div>
                   <div class="cs_single_product_size">
-    <h4 class="cs_fs_16 cs_medium">Tamanho</h4>
-    <ul class="cs_size_filter_list cs_mp0">
-        <li>
-            <input type="radio" name="size">
-            <span>P</span>
-        </li>
-        <li>
-            <input type="radio" name="size">
-            <span>M</span>
-        </li>
-        <li>
-            <input type="radio" name="size">
-            <span>G</span>
-        </li>
-        <li>
-            <input type="radio" name="size">
-            <span>GG</span>
-        </li>
-    </ul>
-</div>
-<div class="cs_single_product_color">
-    <h4 class="cs_fs_16 cs_medium">Cor</h4>
-    <ul class="cs_color_filter_list cs_type_1 cs_mp0">
-        <li>
-            <div class="cs_color_filter">
-                <input type="radio" name="color">
-                <span class="cs_color_filter_circle cs_accent_bg"></span>
-                <span class="cs_color_text">Azul</span>
-            </div>
-        </li>
-    </ul>
-</div>
-
+                     <h4 class="cs_fs_16 cs_medium">Tamanho</h4>
+                     <ul class="cs_size_filter_list cs_mp0">
+                        <li v-for="size in product?.sizes" :key="size.id">
+                           <input type="radio" name="size">
+                           <span>{{ size.name }}</span>
+                        </li>
+                     </ul>
+                  </div>
+                  <div class="cs_single_product_color">
+                     <h4 class="cs_fs_16 cs_medium">Cor</h4>
+                     <ul class="cs_color_filter_list cs_type_1 cs_mp0">
+                        <li v-for="color in product?.colors" :key="color.id">
+                           <div class="cs_color_filter">
+                              <input type="radio" name="color">
+                              <span class="cs_color_filter_circle" :class="color.class"></span>
+                              <span class="cs_color_text">{{ color.name }}</span>
+                           </div>
+                        </li>
+                     </ul>
+                  </div>
                   <div class="cs_action_btns">
                      <div class="cs_quantity">
                         <button class="cs_quantity_btn cs_increment"><i class="fa-solid fa-angle-up"></i></button>
@@ -133,13 +142,10 @@ onMounted(async () => {
                         <b class="cs_medium">SKU: </b>{{ product?.sku }}
                      </li>
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Categorias: </b>Vestido
+                        <b class="cs_medium">Categorias: </b> {{ formattedCategories }}
                      </li>
                      <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Tags: </b>Homens, Camiseta, Vestuário
-                     </li>
-                     <li class="cs_fs_16 cs_normal">
-                        <b class="cs_medium">Marca: </b>Levine
+                        <b class="cs_medium">Marca: </b>{{ product?.brand?.name }}
                      </li>
                   </ul>
 
@@ -164,11 +170,11 @@ onMounted(async () => {
                      <tbody>
                         <tr>
                            <td>Cor</td>
-                           <td>Azul, Cinza, Verde, Vermelho, Amarelo</td>
+                           <td>{{ formattedColors }}</td>
                         </tr>
                         <tr>
                            <td>Tamanho</td>
-                           <td>Grande, Médio, Pequeno</td>
+                           <td>{{ formattedSizes }}</td>
                         </tr>
                      </tbody>
                   </table>
@@ -240,4 +246,152 @@ onMounted(async () => {
          </div>
       </div>
    </section>
+
+   <section class="cs_slider container-fluid position-relative">
+    <div class="cs_height_120 cs_height_lg_70"></div>
+    <div class="container">
+      <div class="cs_section_heading cs_style_1">
+        <div class="cs_section_heading_in">
+          <h2 class="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">Related Products</h2>
+        </div>
+        <div class="cs_slider_arrows cs_style_2">
+          <div class="cs_left_arrow cs_slider_arrow cs_accent_color">
+            <i class="fa-solid fa-chevron-left"></i>
+          </div>
+          <div class="cs_right_arrow cs_slider_arrow cs_accent_color">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="cs_height_63 cs_height_lg_35"></div>
+    </div>
+    <div class="cs_slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0"
+      data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="2" data-lg-slides="3"
+      data-add-slides="4">
+      <div class="cs_slider_wrapper" v-if="relatedProducts">
+        <div class="slick_slide_in" v-for="relateproduct in relatedProducts" :key="relateproduct.id">
+          <div class="cs_product cs_style_1">
+            <div class="cs_product_thumb position-relative">
+              <img :src="relateproduct?.images[0]?.image_path" alt="Product Image" class="w-100">
+              <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-25%</div>
+              <div class="cs_cart_badge position-absolute">
+                <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-eye"></i>
+                </a>
+              </div>
+              <a href="cart.html" class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
+                Add To Cart</a>
+            </div>
+            <div class="cs_product_info text-center">
+              <h3 class="cs_product_title cs_fs_21 cs_medium">
+                <a href="product_details.html">{{ relateproduct.name }}</a>
+              </h3>
+              <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$250.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="slick_slide_in">
+          <div class="cs_product cs_style_1">
+            <div class="cs_product_thumb position-relative">
+              <img src="@/assets/img/product2.png" alt="Product Image" class="w-100">
+              <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-8%</div>
+              <div class="cs_cart_badge position-absolute">
+                <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-eye"></i>
+                </a>
+              </div>
+              <a href="cart.html" class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
+                Add To Cart</a>
+            </div>
+            <div class="cs_product_info text-center">
+              <h3 class="cs_product_title cs_fs_21 cs_medium">
+                <a href="product_details.html">Gray color cotton men T-shirt</a>
+              </h3>
+              <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$220.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="slick_slide_in">
+          <div class="cs_product cs_style_1">
+            <div class="cs_product_thumb position-relative">
+              <img src="@/assets/img/product9.png" alt="Product Image" class="w-100">
+              <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-8%</div>
+              <div class="cs_cart_badge position-absolute">
+                <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-eye"></i>
+                </a>
+              </div>
+              <a href="cart.html" class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
+                Add To Cart</a>
+            </div>
+            <div class="cs_product_info text-center">
+              <h3 class="cs_product_title cs_fs_21 cs_medium">
+                <a href="product_details.html">Awesome striped casual shirt</a>
+              </h3>
+              <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$220.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="slick_slide_in">
+          <div class="cs_product cs_style_1">
+            <div class="cs_product_thumb position-relative">
+              <img src="@/assets/img/product26.png" alt="Product Image" class="w-100">
+              <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-12%</div>
+              <div class="cs_cart_badge position-absolute">
+                <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-eye"></i>
+                </a>
+              </div>
+              <a href="cart.html" class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
+                Add To Cart</a>
+            </div>
+            <div class="cs_product_info text-center">
+              <h3 class="cs_product_title cs_fs_21 cs_medium">
+                <a href="product_details.html">Men casual check shirt</a>
+              </h3>
+              <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$350.00</p>
+            </div>
+          </div>
+        </div>
+        <div class="slick_slide_in">
+          <div class="cs_product cs_style_1">
+            <div class="cs_product_thumb position-relative">
+              <img src="@/assets/img/product2.png" alt="Product Image" class="w-100">
+              <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-8%</div>
+              <div class="cs_cart_badge position-absolute">
+                <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-heart"></i>
+                </a>
+                <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <i class="fa-regular fa-eye"></i>
+                </a>
+              </div>
+              <a href="cart.html" class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
+                Add To Cart</a>
+            </div>
+            <div class="cs_product_info text-center">
+              <h3 class="cs_product_title cs_fs_21 cs_medium">
+                <a href="product_details.html">Gray color cotton men T-shirt</a>
+              </h3>
+              <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$220.00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cs_height_134 cs_height_lg_80"></div>
+  </section>
+  <hr>
 </template>
