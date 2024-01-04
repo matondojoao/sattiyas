@@ -163,9 +163,9 @@ onMounted(async () => {
                                         <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-heart"></i>
                                         </a>
-                                        <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                                        <RouterLink :to="{name:'produto', params:{slug: product.slug}}" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-eye"></i>
-                                        </a>
+                                        </RouterLink>
                                     </div>
 
                                     <button @click="addToCart(product.id)"

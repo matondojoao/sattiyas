@@ -13,7 +13,7 @@ const colors = ref([]);
 const brands = ref([]);
 const sizes = ref([]);
 const selectedCategoryIds = ref([]);
-
+const selectedSize=ref()
 const fetchCategories = async () => {
   try {
     await useCategoryStore().fetchCategories();
@@ -22,6 +22,19 @@ const fetchCategories = async () => {
     console.error("Erro ao buscar categorias:", error);
   }
 };
+const filterProductBySize= async(size) => {
+  const sizesArray = Array.isArray(size) ? size : [size];
+   await useProductsStore().fetchProducts({sizes:sizesArray });
+}
+
+const filterProductByColor = async(color) =>{
+  const colorsArray = Array.isArray(color) ? color : [color];
+  await useProductsStore().fetchProducts({colors:colorsArray });
+}
+
+const filterProductByBrand = async(brand) =>{
+  await useProductsStore().fetchProducts({brand:brand });
+}
 
 const fetchBrans = async () => {
   try {
@@ -143,7 +156,7 @@ onMounted(async () => {
       <ul class="cs_color_filter_list cs_mp0">
         <li v-for="color in colors" :key="color.id">
           <div class="cs_color_filter">
-            <input type="radio" name="color" />
+            <input type="radio" name="color" @click="filterProductByColor(color.id)"/>
             <span class="cs_color_filter_circle" :class="color.class"></span>
             <span class="cs_color_text">{{ color.name }}</span>
           </div>
@@ -156,7 +169,7 @@ onMounted(async () => {
       </h3>
       <ul class="cs_size_filter_list cs_mp0">
         <li v-for="size in sizes" :key="size.id">
-          <input type="radio" name="size" />
+          <input type="radio" name="size" @click="filterProductBySize(size.id)"/>
           <span>{{ size.name }}</span>
         </li>
       </ul>
@@ -167,7 +180,7 @@ onMounted(async () => {
       </h3>
       <ul class="cs_brand_filter_list cs_mp0">
         <li v-for="brand in brands" :key="brand.id">
-          <input type="radio" name="brand" />
+          <input type="radio" name="brand" @click="filterProductByBrand(brand.id)"/>
           <span>{{ brand.name }}</span>
         </li>
       </ul>

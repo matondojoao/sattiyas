@@ -9,13 +9,15 @@ export const useProductsStore = defineStore('products', {
   }),
 
   actions: {
-    async fetchProducts({ name = '', min_price = '', max_price = '', categories = [], brand = '', order_by = '' } = {}) {
+    async fetchProducts({ name = '', min_price = '', max_price = '', categories = [],sizes=[],colors=[], brand = '', order_by = '' } = {}) {
       try {
         const params = new URLSearchParams();
         params.append('name', name);
         params.append('min_price', min_price);
         params.append('max_price', max_price);
         categories.forEach(category => params.append('categories[]', category));
+        sizes.forEach(size => params.append('sizes[]', size));
+        colors.forEach(color => params.append('colors[]', color));
         params.append('brand', brand);
         params.append('order_by', order_by);
 
