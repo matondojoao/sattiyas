@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed, reactive, watch } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
@@ -10,7 +10,7 @@ const showPerloader = ref(true);
 const route = useRoute();
 const slug = ref(route.params.slug);
 const product = ref(null)
-const relatedProducts = reactive([])
+const relatedProducts = ref([])
 
 const fechProduct = async () => {
    try {
@@ -22,9 +22,6 @@ const fechProduct = async () => {
       console.error('Erro ao buscar produto:', error);
    }
 }
-watch(() => relatedProducts.value, () => {
-   $(".cs_slider_wrapper").slick('unslick').slick();
-});
 
 onMounted(async () => {
    main();
@@ -247,59 +244,56 @@ const formattedSizes = computed(() => {
       </div>
    </section>
 
-   <span v-for="p in relatedProducts">{{ p.name }}</span>
-
    <section class="cs_slider container-fluid position-relative">
-      <div class="cs_height_120 cs_height_lg_70"></div>
-      <div class="container">
-         <div class="cs_section_heading cs_style_1">
-            <div class="cs_section_heading_in">
-               <h2 class="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">Related Products</h2>
-            </div>
-            <div class="cs_slider_arrows cs_style_2">
-               <div class="cs_left_arrow cs_slider_arrow cs_accent_color">
-                  <i class="fa-solid fa-chevron-left"></i>
-               </div>
-               <div class="cs_right_arrow cs_slider_arrow cs_accent_color">
-                  <i class="fa-solid fa-chevron-right"></i>
-               </div>
-            </div>
-         </div>
-         <div class="cs_height_63 cs_height_lg_35"></div>
+    <div class="cs_height_120 cs_height_lg_70"></div>
+    <div class="container">
+      <div class="cs_section_heading cs_style_1">
+        <div class="cs_section_heading_in">
+          <h2 class="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">Produtos Relacionados</h2>
+        </div>
+        <div class="cs_slider_arrows cs_style_2">
+          <div class="cs_left_arrow cs_slider_arrow cs_accent_color">
+            <i class="fa-solid fa-chevron-left"></i>
+          </div>
+          <div class="cs_right_arrow cs_slider_arrow cs_accent_color">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
       </div>
-      <div class="cs_slider_container" data-autoplay="0" data-loop="1" data-speed="600" data-center="0"
-         data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="2" data-lg-slides="3"
-         data-add-slides="4">
-         <div class="cs_slider_wrapper">
-            <div class="slick_slide_in" v-for="p in relatedProducts" :key="p.id">
-               <div class="cs_product cs_style_1">
-                  <div class="cs_product_thumb position-relative">
-                     <img src="@/assets/img/product1.png" alt="Product Image" class="w-100">
-                     <div class="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">-25%</div>
-                     <div class="cs_cart_badge position-absolute">
-                        <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
-                           <i class="fa-regular fa-heart"></i>
-                        </a>
-                        <a href="product_details.html" class="cs_cart_icon cs_accent_bg cs_white_color">
-                           <i class="fa-regular fa-eye"></i>
-                        </a>
-                     </div>
-                     <a href="cart.html"
-                        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">
-                        Add To Cart</a>
-                  </div>
-                  <div class="cs_product_info text-center">
-                     <h3 class="cs_product_title cs_fs_21 cs_medium">
-                        <a href="product_details.html">Pure black cotton men T-shirt</a>
-                     </h3>
-                     <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">$250.00</p>
-                  </div>
-               </div>
+      <div class="cs_height_63 cs_height_lg_35"></div>
+    </div>
+    <div class="cs_slider_container" v-if="relatedProducts.length > 0" data-autoplay="0" data-loop="1" data-speed="600"
+        data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
+        data-lg-slides="3" :data-add-slides="relatedProducts.length">
+        <div class="cs_slider_wrapper">
+          <div class="slick_slide_in" v-for="relatedProduct in relatedProducts" :key="relatedProduct.id">
+            <div class="cs_product cs_style_1">
+              <div class="cs_product_thumb position-relative">
+                <img :src="relatedProduct.images[0].image_path" :alt="relatedProduct.name">
+                <div class="cs_cart_badge position-absolute">
+                  <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                    <i class="fa-regular fa-heart"></i>
+                  </a>
+                  <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }"
+                    class="cs_cart_icon cs_accent_bg cs_white_color">
+                    <i class="fa-regular fa-eye"></i>
+                  </RouterLink>
+                </div>
+                <a href="cart.html"
+                  class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar ao
+                  Carrinho</a>
+              </div>
+              <div class="cs_product_info text-center">
+                <h3 class="cs_product_title cs_fs_21 cs_medium">
+                  <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }">{{ relatedProduct.name }}</RouterLink>
+                </h3>
+                <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ relatedProduct.regular_price }}</p>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-      <div class="cs_height_134 cs_height_lg_80"></div>
-   </section>
-   <!-- End new item store -->
+    <div class="cs_height_134 cs_height_lg_80"></div>
+  </section>
    <hr>
 </template>

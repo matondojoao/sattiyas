@@ -23,7 +23,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="cs_slider position-relative">
+  <section class="cs_slider position-relative" v-if="products.length > 0">
     <div class="container">
       <div class="cs_section_heading cs_style_1">
         <div class="cs_section_heading_in">
