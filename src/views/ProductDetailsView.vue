@@ -25,6 +25,7 @@ const fechProduct = async () => {
 watch(() => relatedProducts.value, () => {
    $(".cs_slider_wrapper").slick('unslick').slick();
 });
+
 onMounted(async () => {
    main();
    fechProduct();

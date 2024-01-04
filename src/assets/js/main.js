@@ -1,4 +1,6 @@
+
 export function main(){
+
   (function ($) {
     ('use strict');
   
@@ -383,30 +385,7 @@ export function main(){
     /*-----------------------------------------------------------
       11. Price Range Slider
      ------------------------------------------------------------*/
-    function priceInit() {
-      if ($.exists('#slider_range')) {
-        $('#slider_range').slider({
-          range: true,
-          min: 0,
-          max: 1000,
-          values: [100, 600],
-          slide: function (event, ui) {
-            $('#amount').val(
-              'Price: $' + ui.values[0] + '.00 - $' + ui.values[1] + '.00',
-            );
-          },
-        });
-      }
-      if ($.exists('#amount')) {
-        $('#amount').val(
-          'Price: $' +
-            $('#slider_range').slider('values', 0) +
-            '.00 - $' +
-            $('#slider_range').slider('values', 1) +
-            '.00',
-        );
-      }
-    }
+     
     /*----------------------------------------------------------
       12. Single product slider
      ------------------------------------------------------------*/
