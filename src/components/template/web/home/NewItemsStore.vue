@@ -73,5 +73,6 @@ onMounted(async () => {
         </div>
       </div>
       <div class="cs_pagination cs_style_2 cs_hide_desktop"></div>
-  </div>
-</section></template>
+    </div>
+  </section>
+</template>
