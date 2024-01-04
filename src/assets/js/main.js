@@ -52,7 +52,6 @@ export function main(){
       scrollUp();
       tabs();
       review();
-      priceInit();
       singleProductSlider();
       shopGeneral();
     });
