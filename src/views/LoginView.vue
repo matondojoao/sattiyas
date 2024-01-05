@@ -7,15 +7,33 @@ import {useRouter} from 'vue-router';
 
 const router = useRouter ();
 
-const user = reactive({
+const userLogin = reactive({
   email: "matondojoaokitemoco@gmail.com",
   password: "@matondo@joao115022",
   device_name: "axios",
 });
 
+const userRegister = reactive({
+  email: "",
+  password: "",
+  device_name: "axios",
+});
+
 async function login() {
   try {
-    const response = await http.post("/auth/login", user);
+    const response = await http.post("/auth/login", userLogin);
+    auth.setToken(response.data.token);
+    console.log("Resposta do servidor:", response.data.token);
+    http.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    router.push('/lista-de-desejos');
+  } catch (error) {
+    console.log('Erro na resposta do servidor' + error);
+  }
+}
+
+async function register() {
+  try {
+    const response = await http.post("/auth/register", userRegister);
     auth.setToken(response.data.token);
     console.log("Resposta do servidor:", response.data.token);
     http.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
@@ -34,10 +52,10 @@ async function login() {
         <h2>Login</h2>
         <form @submit.prevent="login">
           <label for="loginUsername">Email:</label>
-          <input type="email" id="loginUsername" v-model="user.email" required>
+          <input type="email" id="loginUsername" v-model="userLogin.email" required>
   
           <label for="loginPassword">Senha:</label>
-          <input type="password" id="loginPassword" v-model="user.password" required>
+          <input type="password" id="loginPassword" v-model="userLogin.password" required>
   
           <button type="submit">Entrar</button>
         </form>
@@ -47,13 +65,13 @@ async function login() {
         <h2>Cadastrar</h2>
         <form @submit.prevent="register">
           <label for="registerUsername">Nome de Usuário:</label>
-          <input type="text" id="registerUsername" v-model="registerUsername" required>
+          <input type="text" id="registerUsername" v-model="userRegister.name" required>
   
           <label for="registerEmail">E-mail:</label>
-          <input type="email" id="registerEmail" v-model="registerEmail" required>
+          <input type="email" id="registerEmail" v-model="userRegister.email" required>
   
           <label for="registerPassword">Senha:</label>
-          <input type="password" id="registerPassword" v-model="registerPassword" required>
+          <input type="password" id="registerPassword" v-model="userRegister.password" required>
   
           <button type="submit">Cadastrar</button>
         </form>

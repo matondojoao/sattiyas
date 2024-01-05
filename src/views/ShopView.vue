@@ -7,7 +7,7 @@ import { useProductsStore } from '@/stores/products';
 import { useCartStore } from '@/stores/cart';
 import Perloader from '@/components/template/web/Perloader.vue'
 import { RouterLink } from 'vue-router'
-
+import { useWishListStore } from '@/stores/wishlist';
 
 const showPerloader = ref(true);
 const cart = useCartStore()
@@ -47,8 +47,11 @@ const orderProducts = async ()=>{
     const order_by_value = order_by.value
     await useProductsStore().fetchProducts({order_by:order_by_value})
 }
+
+const addToWishList = async (product)=>{
+    await useWishListStore().addProductToWishList({product_id: product})
+}
 onMounted(async () => {
-    console.log("Renderizado");
     fetchProducts();
     main();
     setTimeout(() => {
@@ -161,9 +164,9 @@ onMounted(async () => {
                                     </div>
 
                                     <div class="cs_cart_badge position-absolute">
-                                        <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                                        <button @click="addToWishList(product.id)" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-heart"></i>
-                                        </a>
+                                        </button>
                                         <RouterLink :to="{name:'produto', params:{slug: product.slug}}" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-eye"></i>
                                         </RouterLink>
