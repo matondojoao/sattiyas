@@ -3,6 +3,9 @@ import { reactive } from 'vue';
 import http from '@/services/http.js'
 import {userAuth} from '@/stores/auth.js'
 const auth = userAuth();
+import {useRouter} from 'vue-router';
+
+const router = useRouter ();
 
 const user = reactive({
   email: "matondojoaokitemoco@gmail.com",
@@ -16,16 +19,11 @@ async function login() {
     auth.setToken(response.data.token)
     auth.checkToken()
     console.log("Resposta do servidor:", response.data.token);
-    // router.push('/dashboard')
+    router.push('/lista-de-desejos')
   } catch (error) {
     console.log('Erro na resposta do servidor' + error);
   }
 }
-
-const register = () => {
-  // Implemente a lógica de cadastro aqui
-  console.log('Cadastrando...');
-};
 </script>
 
 <template>

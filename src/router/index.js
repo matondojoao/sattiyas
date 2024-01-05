@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
+import {userAuth} from '@/stores/auth.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,7 +38,10 @@ const router = createRouter({
     {
       path: '/lista-de-desejos',
       name: 'lista-de-desejos',
-      component: () => import('../views/WishlistView.vue')
+      component: () => import('../views/WishlistView.vue'),
+      meta:{
+        auth:true
+      }
     },
     {
       path: '/produto/:slug',
@@ -51,5 +55,30 @@ const router = createRouter({
     }
   ]
 })
+
+router.beforeEach(async (to, from, next) => {
+  if (to.meta?.auth) {
+    const auth = userAuth();
+
+    if (auth.token && auth.user) {
+      try {
+        const isAuthenticated = await auth.checkToken();
+
+        if (isAuthenticated.data.authenticated === true) {
+          next();
+        } else {
+          next({ name: 'login' });
+        }
+      } catch (error) {
+        console.error('Erro ao verificar o token:', error);
+        next({ name: 'login' });
+      }
+    } else {
+      next({ name: 'login' });
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

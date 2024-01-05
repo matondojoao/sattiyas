@@ -18,21 +18,24 @@ export const userAuth = defineStore('auth', () => {
 
     async function checkToken() {
         try {
-            console.log('Verificando token...');
+            const tokenAuth = 'Bearer ' + token.value;
+            const data = await http.get('/auth/verify', {
+                headers: {
+                    'Authorization': tokenAuth
+                }
+            });
+            return data;
+        } catch (error) {
+            console.error('Erro ao verificar o token:', error);
+            throw error;
+        }finally{
             const tokenAuth = 'Bearer ' + token.value;
             const data = await http.get('/customer/profile', {
                 headers: {
                     'Authorization': tokenAuth
                 }
             });
-    
-            setUser(data.data);
-    
-            console.log('Resposta do servidor:', data.data);
-            return data;
-        } catch (error) {
-            console.error('Erro ao verificar o token:', error);
-            throw error;
+            setUser(data.data)
         }
     }    
     
