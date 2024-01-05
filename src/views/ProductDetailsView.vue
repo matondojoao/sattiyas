@@ -79,8 +79,6 @@ async function avaliateProduct() {
    } catch (error) {
       console.error('Erro ao verificar o token:', error);
    }
-
-   console.log(isUserAuthenticated.value);
 }
 
 
@@ -110,6 +108,18 @@ const formattedSizes = computed(() => {
       return product.value.sizes.map(size => size.name).join(', ');
    }
 });
+
+const formatarData = (timestampString) => {
+  try {
+    const data = new Date(timestampString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+    return new Intl.DateTimeFormat('pt-BR', options).format(data);
+  } catch (error) {
+    console.error('Erro ao formatar data:', error);
+    return '';
+  }
+};
 
 </script>
 
@@ -257,7 +267,7 @@ const formattedSizes = computed(() => {
                                  </div>
                                  <p class="mb-0 cs_primary_color cs_semibold">{{ review.user.name }}</p>
                               </div>
-                              <p class="cs_review_posted_by">{{ review.created_at }}</p>
+                              <p class="cs_review_posted_by">{{  formatarData(review.created_at) }}</p>
                            </div>
                            <p class="cs_review_text">{{ review.comment }}</p>
                         </div>
