@@ -1,25 +1,30 @@
 <script setup>
 import { useProductsStore } from '@/stores/products';
-import { onMounted, ref } from 'vue';
-import { main } from '@/assets/js/main.js'
+import { onMounted, ref, watchEffect } from 'vue';
+import { main } from '@/assets/js/main.js';
 
 const products = ref([]);
+const isDataLoaded = ref(false);
 
 const fetchProducts = async () => {
   try {
     await useProductsStore().fetchProducts();
     products.value = useProductsStore().getProducts;
-    console.log(products.value)
+    isDataLoaded.value = true;
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
   }
 };
 
 onMounted(async () => {
-  fetchProducts();
-  main();
+  await fetchProducts();
 });
 
+watchEffect(() => {
+  if (isDataLoaded.value) {
+    main();
+  }
+});
 </script>
 
 <template>
@@ -41,7 +46,7 @@ onMounted(async () => {
       <div class="cs_height_63 cs_height_lg_35"></div>
     </div>
     <div class="container-fluid">
-      <div class="cs_slider_container" v-if="products.length > 0" data-autoplay="0" data-loop="1" data-speed="600"
+      <div class="cs_slider_container" data-autoplay="0" data-loop="1" data-speed="600"
         data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
         data-lg-slides="3" :data-add-slides="products.length">
         <div class="cs_slider_wrapper">
