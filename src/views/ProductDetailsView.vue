@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed,watchEffect } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
@@ -17,23 +17,17 @@ const fechProduct = async () => {
       const response = await http.get(`/product/${slug.value}`)
       product.value = response.data.data.product
       relatedProducts.value = response.data.data.relatedProducts
-      isDataLoaded.value = true;
    } catch (error) {
       console.error('Erro ao buscar produto:', error);
    }
 }
 
 onMounted(async () => {
+   main();
    fechProduct();
    setTimeout(() => {
       showPerloader.value = false;
    }, 3000);
-});
-
-watchEffect(() => {
-  if (isDataLoaded.value) {
-    main();
-  }
 });
 
 const formattedCategories = computed(() => {

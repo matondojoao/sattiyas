@@ -5,6 +5,7 @@ import Header from "@/components/template/web/Header.vue";
 import Footer from "@/components/template/web/Footer.vue";
 import ScrollUpButton from "@/components/template/web/ScrollUpButton.vue";
 import { main } from "@/assets/js/main.js";
+import ProductDetailsView from "@/views/ProductDetailsView.vue";
 
 onMounted(async () => {
   main();
@@ -14,11 +15,7 @@ onMounted(async () => {
 <template>
   <div>
     <Header />
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <router-view></router-view>
     <Footer />
     <ScrollUpButton />
   </div>
