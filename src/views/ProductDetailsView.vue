@@ -4,9 +4,11 @@ import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
 import { main } from '@/assets/js/main.js'
+import { userAuth } from '@/stores/auth';
 
 const showPerloader = ref(true);
 const isDataLoaded = ref(false);
+const isUserAuthenticated = ref(false)
 const route = useRoute();
 const slug = ref(route.params.slug);
 const product = ref(null)
@@ -21,6 +23,27 @@ const fechProduct = async () => {
       console.error('Erro ao buscar produto:', error);
    }
 }
+
+const checkAuthentication= async () =>{
+      const auth = userAuth();
+
+      if (auth.token) {
+        try {
+          const isAuthenticated = await auth.checkToken();
+
+          if (isAuthenticated.data.authenticated === true) {
+            isUserAuthenticated.value = true;
+          } else {
+            isUserAuthenticated.value = false;
+          }
+        } catch (error) {
+          console.error("Erro ao verificar token:", error);
+          isUserAuthenticated.value = false;
+        }
+      } else {
+         isUserAuthenticated.value = false;
+      }
+    }
 
 onMounted(async () => {
    main();
@@ -200,43 +223,46 @@ const formattedSizes = computed(() => {
                         </div>
                      </li>
                   </ul>
-                  <p class="m-0">Seu endereço de e-mail não será publicado. Campos obrigatórios estão marcados com *</p>
-                  <div class="cs_height_20 cs_height_lg_20"></div>
-                  <div class="cs_input_rating_wrap">
-                     <p>Sua avaliação *</p>
-                     <div class="cs_input_rating cs_accent_color" data-rating="0">
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                        <i class="fa-regular fa-star"></i>
-                     </div>
-                  </div>
-                  <div class="cs_height_20 cs_height_lg_22"></div>
-                  <form class="row cs_review_form cs_gap_y_24">
-                     <div class="col-lg-12">
-                        <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *"></textarea>
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="text" class="cs_form_field" placeholder="Seu nome *">
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="text" class="cs_form_field" placeholder="Seu e-mail *">
-                     </div>
-                     <div class="col-lg-12">
-                        <div class="form_check">
-                           <input class="form-check-input" type="checkbox">
-                           <label class="form-check-label m-0">
-                              Ao usar este formulário, você concorda com o armazenamento e manuseio dos seus dados por este
-                              site. *
-                           </label>
+
+                  <div v-if="isUserAuthenticated">
+                     <p class="m-0">Seu endereço de e-mail não será publicado. Campos obrigatórios estão marcados com *</p>
+                     <div class="cs_height_20 cs_height_lg_20"></div>
+                     <div class="cs_input_rating_wrap">
+                        <p>Sua avaliação *</p>
+                        <div class="cs_input_rating cs_accent_color" data-rating="0">
+                           <i class="fa-regular fa-star"></i>
+                           <i class="fa-regular fa-star"></i>
+                           <i class="fa-regular fa-star"></i>
+                           <i class="fa-regular fa-star"></i>
+                           <i class="fa-regular fa-star"></i>
                         </div>
                      </div>
-                     <div class="col-lg-12">
-                        <button class="cs_btn cs_style_1 cs_fs_16 cs_medium" type="submit">Enviar agora</button>
-                     </div>
-                  </form>
-
+                     <div class="cs_height_20 cs_height_lg_22"></div>
+                     <form class="row cs_review_form cs_gap_y_24">
+                        <div class="col-lg-12">
+                           <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *"></textarea>
+                        </div>
+                        <div class="col-lg-6">
+                           <input type="text" class="cs_form_field" placeholder="Seu nome *">
+                        </div>
+                        <div class="col-lg-6">
+                           <input type="text" class="cs_form_field" placeholder="Seu e-mail *">
+                        </div>
+                        <div class="col-lg-12">
+                           <div class="form_check">
+                              <input class="form-check-input" type="checkbox">
+                              <label class="form-check-label m-0">
+                                 Ao usar este formulário, você concorda com o armazenamento e manuseio dos seus dados por
+                                 este
+                                 site. *
+                              </label>
+                           </div>
+                        </div>
+                        <div class="col-lg-12">
+                           <button class="cs_btn cs_style_1 cs_fs_16 cs_medium" type="submit">Enviar agora</button>
+                        </div>
+                     </form>
+                  </div>
                </div>
             </div>
          </div>
@@ -244,55 +270,57 @@ const formattedSizes = computed(() => {
    </section>
 
    <section class="cs_slider container-fluid position-relative">
-    <div class="cs_height_120 cs_height_lg_70"></div>
-    <div class="container">
-      <div class="cs_section_heading cs_style_1">
-        <div class="cs_section_heading_in">
-          <h2 class="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">Produtos Relacionados</h2>
-        </div>
-        <div class="cs_slider_arrows cs_style_2">
-          <div class="cs_left_arrow cs_slider_arrow cs_accent_color">
-            <i class="fa-solid fa-chevron-left"></i>
-          </div>
-          <div class="cs_right_arrow cs_slider_arrow cs_accent_color">
-            <i class="fa-solid fa-chevron-right"></i>
-          </div>
-        </div>
-      </div>
-      <div class="cs_height_63 cs_height_lg_35"></div>
-    </div>
-    <div class="cs_slider_container" v-if="relatedProducts.length > 0" data-autoplay="0" data-loop="1" data-speed="600"
-        data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
-        data-lg-slides="3" :data-add-slides="relatedProducts.length">
-        <div class="cs_slider_wrapper">
-          <div class="slick_slide_in" v-for="relatedProduct in relatedProducts" :key="relatedProduct.id">
-            <div class="cs_product cs_style_1">
-              <div class="cs_product_thumb position-relative">
-                <img :src="relatedProduct.images[0].image_path" :alt="relatedProduct.name">
-                <div class="cs_cart_badge position-absolute">
-                  <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
-                    <i class="fa-regular fa-heart"></i>
-                  </a>
-                  <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }"
-                    class="cs_cart_icon cs_accent_bg cs_white_color">
-                    <i class="fa-regular fa-eye"></i>
-                  </RouterLink>
-                </div>
-                <a href="cart.html"
-                  class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar ao
-                  Carrinho</a>
-              </div>
-              <div class="cs_product_info text-center">
-                <h3 class="cs_product_title cs_fs_21 cs_medium">
-                  <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }">{{ relatedProduct.name }}</RouterLink>
-                </h3>
-                <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ relatedProduct.regular_price }}</p>
-              </div>
+      <div class="cs_height_120 cs_height_lg_70"></div>
+      <div class="container">
+         <div class="cs_section_heading cs_style_1">
+            <div class="cs_section_heading_in">
+               <h2 class="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">Produtos Relacionados</h2>
             </div>
-          </div>
-        </div>
+            <div class="cs_slider_arrows cs_style_2">
+               <div class="cs_left_arrow cs_slider_arrow cs_accent_color">
+                  <i class="fa-solid fa-chevron-left"></i>
+               </div>
+               <div class="cs_right_arrow cs_slider_arrow cs_accent_color">
+                  <i class="fa-solid fa-chevron-right"></i>
+               </div>
+            </div>
+         </div>
+         <div class="cs_height_63 cs_height_lg_35"></div>
       </div>
-    <div class="cs_height_134 cs_height_lg_80"></div>
-  </section>
+      <div class="cs_slider_container" v-if="relatedProducts.length > 0" data-autoplay="0" data-loop="1" data-speed="600"
+         data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
+         data-lg-slides="3" :data-add-slides="relatedProducts.length">
+         <div class="cs_slider_wrapper">
+            <div class="slick_slide_in" v-for="relatedProduct in relatedProducts" :key="relatedProduct.id">
+               <div class="cs_product cs_style_1">
+                  <div class="cs_product_thumb position-relative">
+                     <img :src="relatedProduct.images[0].image_path" :alt="relatedProduct.name">
+                     <div class="cs_cart_badge position-absolute">
+                        <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                           <i class="fa-regular fa-heart"></i>
+                        </a>
+                        <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }"
+                           class="cs_cart_icon cs_accent_bg cs_white_color">
+                           <i class="fa-regular fa-eye"></i>
+                        </RouterLink>
+                     </div>
+                     <a href="cart.html"
+                        class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar ao
+                        Carrinho</a>
+                  </div>
+                  <div class="cs_product_info text-center">
+                     <h3 class="cs_product_title cs_fs_21 cs_medium">
+                        <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }">{{ relatedProduct.name
+                        }}</RouterLink>
+                     </h3>
+                     <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ relatedProduct.regular_price }}
+                     </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="cs_height_134 cs_height_lg_80"></div>
+   </section>
    <hr>
 </template>
