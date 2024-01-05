@@ -60,7 +60,7 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta?.auth) {
     const auth = userAuth();
 
-    if (auth.token && auth.user) {
+    if (auth.token) {
       try {
         const isAuthenticated = await auth.checkToken();
 

@@ -16,14 +16,15 @@ const user = reactive({
 async function login() {
   try {
     const response = await http.post("/auth/login", user);
-    auth.setToken(response.data.token)
-    auth.checkToken()
+    auth.setToken(response.data.token);
     console.log("Resposta do servidor:", response.data.token);
-    router.push('/lista-de-desejos')
+    http.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+    router.push('/lista-de-desejos');
   } catch (error) {
     console.log('Erro na resposta do servidor' + error);
   }
 }
+
 </script>
 
 <template>
