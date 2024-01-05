@@ -1,23 +1,25 @@
 <script setup>
-import { onMounted, ref, computed,watchEffect } from 'vue';
+import { onMounted, ref, computed, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
 import { main } from '@/assets/js/main.js'
 import { userAuth } from '@/stores/auth';
 
+const auth = userAuth();
 const showPerloader = ref(true);
-const isDataLoaded = ref(false);
+const isDataLoaded = ref();
 const isUserAuthenticated = ref(false)
 const route = useRoute();
 const slug = ref(route.params.slug);
 const product = ref(null)
 const relatedProducts = ref([])
+const comment = ref()
 
 watchEffect(() => {
-  if (isDataLoaded.value) {
-    main();
-  }
+   if (isDataLoaded.value) {
+      main();
+   }
 });
 
 const fechProduct = async () => {
@@ -25,35 +27,67 @@ const fechProduct = async () => {
       const response = await http.get(`/product/${slug.value}`)
       product.value = response.data.data.product
       relatedProducts.value = response.data.data.relatedProducts
-      isDataLoaded.value=true
+      isDataLoaded.value = true
    } catch (error) {
       console.error('Erro ao buscar produto:', error);
    }
 }
 
-const checkAuthentication= async () =>{
-      const auth = userAuth();
+async function checkAuthentication() {
+   
+   try {
 
-      if (auth.token) {
-        try {
-          const isAuthenticated = await auth.checkToken();
+      const tokenAuth = 'Bearer ' + auth.token;
+      const data = await http.get('/auth/verify', {
+         headers: {
+            'Authorization': tokenAuth
+         }
+      });
 
-          if (isAuthenticated.data.authenticated === true) {
-            isUserAuthenticated.value = true;
-          } else {
-            isUserAuthenticated.value = false;
-          }
-        } catch (error) {
-          console.error("Erro ao verificar token:", error);
-          isUserAuthenticated.value = false;
-        }
+      if (data.data.authenticated == true) {
+         isUserAuthenticated.value = true;
       } else {
          isUserAuthenticated.value = false;
       }
-    }
+   } catch (error) {
+      console.error('Erro ao verificar o token:', error);
+   }
+
+   console.log(isUserAuthenticated.value);
+}
+
+async function avaliateProduct() {
+   
+   try {
+
+      const avaliation = {
+         product_id:product.value.id,
+         comment:comment.value,
+         rating:3
+      }
+
+      const tokenAuth = 'Bearer ' + auth.token;
+      const data = await http.post('/product/review',avaliation, {
+         headers: {
+            'Authorization': tokenAuth
+         }
+      });
+      comment.value=''
+      fechProduct()
+
+      
+   } catch (error) {
+      console.error('Erro ao verificar o token:', error);
+   }
+
+   console.log(isUserAuthenticated.value);
+}
+
 
 onMounted(async () => {
+   main();
    fechProduct();
+   checkAuthentication();
    setTimeout(() => {
       showPerloader.value = false;
    }, 3000);
@@ -231,7 +265,7 @@ const formattedSizes = computed(() => {
                   </ul>
 
                   <div v-if="isUserAuthenticated">
-                     <p class="m-0">Seu endereço de e-mail não será publicado. Campos obrigatórios estão marcados com *</p>
+                     <p class="m-0">Campos obrigatórios estão marcados com *</p>
                      <div class="cs_height_20 cs_height_lg_20"></div>
                      <div class="cs_input_rating_wrap">
                         <p>Sua avaliação *</p>
@@ -244,15 +278,9 @@ const formattedSizes = computed(() => {
                         </div>
                      </div>
                      <div class="cs_height_20 cs_height_lg_22"></div>
-                     <form class="row cs_review_form cs_gap_y_24">
+                     <form @submit.prevent="avaliateProduct" class="row cs_review_form cs_gap_y_24">
                         <div class="col-lg-12">
-                           <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *"></textarea>
-                        </div>
-                        <div class="col-lg-6">
-                           <input type="text" class="cs_form_field" placeholder="Seu nome *">
-                        </div>
-                        <div class="col-lg-6">
-                           <input type="text" class="cs_form_field" placeholder="Seu e-mail *">
+                           <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *" v-model="comment"></textarea>
                         </div>
                         <div class="col-lg-12">
                            <div class="form_check">
