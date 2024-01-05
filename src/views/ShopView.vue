@@ -48,6 +48,7 @@ const orderProducts = async ()=>{
     await useProductsStore().fetchProducts({order_by:order_by_value})
 }
 onMounted(async () => {
+    console.log("Renderizado");
     fetchProducts();
     main();
     setTimeout(() => {
