@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed,watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
@@ -14,11 +14,18 @@ const slug = ref(route.params.slug);
 const product = ref(null)
 const relatedProducts = ref([])
 
+watchEffect(() => {
+  if (isDataLoaded.value) {
+    main();
+  }
+});
+
 const fechProduct = async () => {
    try {
       const response = await http.get(`/product/${slug.value}`)
       product.value = response.data.data.product
       relatedProducts.value = response.data.data.relatedProducts
+      isDataLoaded.value=true
    } catch (error) {
       console.error('Erro ao buscar produto:', error);
    }
@@ -46,7 +53,6 @@ const checkAuthentication= async () =>{
     }
 
 onMounted(async () => {
-   main();
    fechProduct();
    setTimeout(() => {
       showPerloader.value = false;
