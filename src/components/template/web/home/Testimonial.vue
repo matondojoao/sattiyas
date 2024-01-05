@@ -42,7 +42,7 @@
                   </blockquote>
                   <div class="cs_testimonial_user">
                     <div class="cs_avatar_thumb">
-                      <img src="@/assets/img/user2.png" alt="Avatar">
+                      <img src="@/assets/img/user.png" alt="Avatar">
                     </div>
                     <h4 class="cs_avatar_title cs_fs_21 cs_semibold mb-0">Jhon Doe</h4>
                     <p class="cs_avatar_subtitle mb-0">Do Reino Unido</p>
@@ -56,7 +56,7 @@
                   </blockquote>
                   <div class="cs_testimonial_user">
                     <div class="cs_avatar_thumb">
-                      <img src="@/assets/img/user3.png" alt="Avatar">
+                      <img src="@/assets/img/user.png" alt="Avatar">
                     </div>
                     <h4 class="cs_avatar_title cs_fs_21 cs_semibold mb-0">Kalio Hokeo</h4>
                     <p class="cs_avatar_subtitle mb-0">De Londres</p>

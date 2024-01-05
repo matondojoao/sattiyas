@@ -38,7 +38,7 @@ onMounted(async () => {
           <tr v-for="item in items" :key="item.id">
             <td>
               <div class="cs_cart_table_media">
-                <img src="@/assets/img/cart-product-1.jpeg" alt="Thumb">
+                <img src="" alt="Thumb">
                 <h3>Camiseta masculina de algodão preto puro</h3>
               </div>
             </td>
