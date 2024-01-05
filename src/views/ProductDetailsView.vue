@@ -34,7 +34,7 @@ const fechProduct = async () => {
 }
 
 async function checkAuthentication() {
-   
+
    try {
 
       const tokenAuth = 'Bearer ' + auth.token;
@@ -53,29 +53,28 @@ async function checkAuthentication() {
       console.error('Erro ao verificar o token:', error);
    }
 
-   console.log(isUserAuthenticated.value);
 }
 
 async function avaliateProduct() {
-   
+
    try {
 
       const avaliation = {
-         product_id:product.value.id,
-         comment:comment.value,
-         rating:3
+         product_id: product.value.id,
+         comment: comment.value,
+         rating: 3
       }
 
       const tokenAuth = 'Bearer ' + auth.token;
-      const data = await http.post('/product/review',avaliation, {
+      const data = await http.post('/product/review', avaliation, {
          headers: {
             'Authorization': tokenAuth
          }
       });
-      comment.value=''
+      comment.value = ''
       fechProduct()
 
-      
+
    } catch (error) {
       console.error('Erro ao verificar o token:', error);
    }
@@ -110,15 +109,15 @@ const formattedSizes = computed(() => {
 });
 
 const formatarData = (timestampString) => {
-  try {
-    const data = new Date(timestampString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+   try {
+      const data = new Date(timestampString);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-    return new Intl.DateTimeFormat('pt-BR', options).format(data);
-  } catch (error) {
-    console.error('Erro ao formatar data:', error);
-    return '';
-  }
+      return new Intl.DateTimeFormat('pt-BR', options).format(data);
+   } catch (error) {
+      console.error('Erro ao formatar data:', error);
+      return '';
+   }
 };
 
 </script>
@@ -267,7 +266,7 @@ const formatarData = (timestampString) => {
                                  </div>
                                  <p class="mb-0 cs_primary_color cs_semibold">{{ review.user.name }}</p>
                               </div>
-                              <p class="cs_review_posted_by">{{  formatarData(review.created_at) }}</p>
+                              <p class="cs_review_posted_by">{{ formatarData(review.created_at) }}</p>
                            </div>
                            <p class="cs_review_text">{{ review.comment }}</p>
                         </div>
@@ -290,7 +289,8 @@ const formatarData = (timestampString) => {
                      <div class="cs_height_20 cs_height_lg_22"></div>
                      <form @submit.prevent="avaliateProduct" class="row cs_review_form cs_gap_y_24">
                         <div class="col-lg-12">
-                           <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *" v-model="comment"></textarea>
+                           <textarea rows="3" class="cs_form_field" placeholder="Escreva sua avaliação *"
+                              v-model="comment"></textarea>
                         </div>
                         <div class="col-lg-12">
                            <div class="form_check">
@@ -313,7 +313,8 @@ const formatarData = (timestampString) => {
       </div>
    </section>
 
-   <section class="cs_slider container-fluid position-relative">
+   <div class="cs_height_134 cs_height_lg_80" v-if="relatedProducts.length == 0"></div>
+   <section class="cs_slider container-fluid position-relative" v-if="relatedProducts.length > 0">
       <div class="cs_height_120 cs_height_lg_70"></div>
       <div class="container">
          <div class="cs_section_heading cs_style_1">
@@ -331,7 +332,7 @@ const formatarData = (timestampString) => {
          </div>
          <div class="cs_height_63 cs_height_lg_35"></div>
       </div>
-      <div class="cs_slider_container" v-if="relatedProducts.length > 0" data-autoplay="0" data-loop="1" data-speed="600"
+      <div class="cs_slider_container" data-autoplay="0" data-loop="1" data-speed="600"
          data-center="0" data-slides-per-view="responsive" data-xs-slides="1" data-sm-slides="2" data-md-slides="3"
          data-lg-slides="3" :data-add-slides="relatedProducts.length">
          <div class="cs_slider_wrapper">
