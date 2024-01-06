@@ -9,6 +9,7 @@ import Perloader from '@/components/template/web/Perloader.vue'
 import { RouterLink } from 'vue-router'
 import { useWishListStore } from '@/stores/wishlist';
 import http from '@/services/http.js'
+import axios from 'axios';
 
 const showPerloader = ref(true);
 const cart = useCartStore()
@@ -25,18 +26,35 @@ const fetchProducts = async () => {
     }
 };
 
-const addProductToCart = async(product, quantity = 1) => {
-            const cartItem = { product, quantity };
-    
-            try {
-                const add = await http.post('/cart/add', cartItem);
-                console.log(add.data);
-                const response = await http.get('/cart');
-                console.log(response.data);
-            } catch (error) {
-                console.error('Erro ao adicionar produto ao carrinho:', error);
-            }
+const addProductToCart = async (product, quantity = 1) => {
+    const cartItem = { product, quantity };
+
+    try {
+        const add = await axios.post('https://api.ecommerce.aviatocreative.com/v1/cart/add', cartItem, { withCredentials: true });
+        console.log(add.data);
+        const response = await axios.get('https://api.ecommerce.aviatocreative.com/v1//cart', { withCredentials: true });
+        console.log(response.data);
+    } catch (error) {
+        console.error('Erro ao adicionar produto ao carrinho:', error);
+    }
+}
+
+
+function getCookie(cookieName) {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
         }
+    }
+
+    return null;
+}
+
 
 const calculateDiscountPercentage = (product) => {
     if (product.regular_price > 0 && product.sale_price !== null) {
@@ -63,7 +81,7 @@ const orderProducts = async ()=>{
 }
 
 const addToWishList = async (product)=>{
-    await useWishListStore().addProductToWishList({product_id: product})
+    await useWishListStore().addProductToWishList(product)
 }
 onMounted(async () => {
     fetchProducts();

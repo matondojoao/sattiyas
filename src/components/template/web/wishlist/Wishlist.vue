@@ -14,6 +14,16 @@ const fetchWishListItems = async () => {
   }
 };
 
+function getStatus(quantity){
+  if (quantity <= 0) {
+    return 'Sem estoque';
+  } else if (quantity > 0 && quantity < 10) {
+    return 'Estoque baixo';
+  } else {
+    return 'Em estoque';
+  }
+};
+
 onMounted(async () => {
   await fetchWishListItems();
   main();
@@ -38,12 +48,12 @@ onMounted(async () => {
           <tr v-for="item in items" :key="item.id">
             <td>
               <div class="cs_cart_table_media">
-                <img src="" alt="Thumb">
-                <h3>Camiseta masculina de algodão preto puro</h3>
+                <img :src="item.product.images[0].image_path" alt="Thumb">
+                <h3>{{ item.product.name }}</h3>
               </div>
             </td>
-            <td>300.00</td>
-            <td>Em estoque</td>
+            <td>{{ item.product.regular_price }}</td>
+            <td>{{ getStatus(item?.stock?.stock_units) }}</td>
             <td class="text-center">
               <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
             </td>
