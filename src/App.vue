@@ -5,8 +5,7 @@ import Header from "@/components/template/web/Header.vue";
 import Footer from "@/components/template/web/Footer.vue";
 import ScrollUpButton from "@/components/template/web/ScrollUpButton.vue";
 import { main } from "@/assets/js/main.js";
-import ProductDetailsView from "@/views/ProductDetailsView.vue";
-
+import '@/assets/js/jquery.slick.min.js'
 onMounted(async () => {
   main();
 });
@@ -20,3 +19,15 @@ onMounted(async () => {
     <ScrollUpButton />
   </div>
 </template>
+
+<style>
+@import '@/assets/css/bootstrap.min.css';
+@import '@/assets/css/fontawesome.min.css';
+@import '@/assets/css/slick.css';
+@import '@/assets/css/jquery-ui.min.css';
+@import '@/assets/css/animated-headline.css';
+@import '@/assets/css/style.css';
+</style>
+
+
+

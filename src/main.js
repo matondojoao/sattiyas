@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import http from '@/services/http.js'
 import { createPinia } from 'pinia'
-
+import '@/assets/js/jquery.slick.min.js'
 const app = createApp(App)
 
 app.use(router)

@@ -8,6 +8,7 @@ import { useCartStore } from '@/stores/cart';
 import Perloader from '@/components/template/web/Perloader.vue'
 import { RouterLink } from 'vue-router'
 import { useWishListStore } from '@/stores/wishlist';
+import http from '@/services/http.js'
 
 const showPerloader = ref(true);
 const cart = useCartStore()
@@ -23,6 +24,19 @@ const fetchProducts = async () => {
         console.error('Erro ao buscar produtos:', error);
     }
 };
+
+const addProductToCart = async(product, quantity = 1) => {
+            const cartItem = { product, quantity };
+    
+            try {
+                const add = await http.post('/cart/add', cartItem);
+                console.log(add.data);
+                const response = await http.get('/cart');
+                console.log(response.data);
+            } catch (error) {
+                console.error('Erro ao adicionar produto ao carrinho:', error);
+            }
+        }
 
 const calculateDiscountPercentage = (product) => {
     if (product.regular_price > 0 && product.sale_price !== null) {
@@ -172,7 +186,7 @@ onMounted(async () => {
                                         </RouterLink>
                                     </div>
 
-                                    <button @click="addToCart(product.id)"
+                                    <button @click="addProductToCart(product.id)"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
                                         style="border: none;">Adicionar ao Carrinho</button>
 
