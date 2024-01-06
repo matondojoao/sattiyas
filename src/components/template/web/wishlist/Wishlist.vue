@@ -14,6 +14,11 @@ const fetchWishListItems = async () => {
   }
 };
 
+const removeProductToWishList = async(item) =>{
+  await useWishListStore().removeProductToWishList(item);
+  await fetchWishListItems()
+} 
+
 function getStatus(quantity){
   if (quantity <= 0) {
     return 'Sem estoque';
@@ -55,7 +60,7 @@ onMounted(async () => {
             <td>{{ item.product.regular_price }}</td>
             <td>{{ getStatus(item?.stock?.stock_units) }}</td>
             <td class="text-center">
-              <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
+              <button @click="removeProductToWishList(item.product.id)" class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
             </td>
             <td class="text-end"><a href="cart.html" class="cs_btn cs_style_1 cs_type_1 cs_fs_16 cs_medium">Adicionar ao
                 Carrinho</a></td>

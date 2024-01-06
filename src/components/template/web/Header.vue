@@ -68,9 +68,9 @@
               <button type="button" class="cs_action_icon cs_header_search_btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
-              <a href="#" class="cs_action_icon cs_modal_btn">
+              <RouterLink :to="{name:'login'}" class="cs_action_icon cs_modal_btn">
                 <i class="fa-regular fa-circle-user"></i>
-              </a>
+              </RouterLink>
               <RouterLink :to="{name:'carrinho'}" class="cs_action_icon">
                 <span>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,6 +93,9 @@
                   </svg>
                 </span>
               </RouterLink>
+              <RouterLink :to="{name:'lista-de-desejos'}" class="cs_action_icon cs_modal_btn">
+                 <i class="fa-regular fa-heart"></i> 
+               </RouterLink>
             </div>
           </div>
         </div>
