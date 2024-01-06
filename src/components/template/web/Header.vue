@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="cs_top_header_in">
           <div class="cs_top_header_left">
-            <p class="cs_medium mb-0">Suporte: <a>produto@sattiyas.com</a></p>
+            <p class="cs_medium mb-0">Suporte: <a>sattiyas@sattiyas.com</a></p>
           </div>
           <div class="cs_top_header_center">
             <div class="cd-headline slide">
@@ -21,13 +21,13 @@
                 <b class="cs_text_slide cs_medium">
                   <span>Oferta especial com 50% de desconto</span>
                   <span>
-                    <a href="shop.html" class="cs_text_slide_btn">Saiba Mais</a>
+                    <RouterLink :to="{name:'loja'}" class="cs_text_slide_btn">Saiba Mais</RouterLink>
                   </span>
                 </b>
                 <b class="cs_text_slide cs_medium">
                   <span>Novo item de chegada para você</span>
                   <span>
-                    <a href="shop.html" class="cs_text_slide_btn">Saiba Mais</a>
+                    <RouterLink :to="{name:'loja'}" class="cs_text_slide_btn">Saiba Mais</RouterLink>
                   </span>
                 </b>
               </span>
@@ -55,9 +55,10 @@
                   <RouterLink :to="{name:'home'}">Início</RouterLink>
                 </li>
                 <li class="menu-item">
-                  <RouterLink :to="{name:'loja'}">Produtos</RouterLink>
+                  <RouterLink :to="{name:'loja'}">Loja</RouterLink>
                 </li>
                 <li><a href="blog.html">Blog</a></li>
+                <li><a href="quem-somos.html">Quem Somos</a></li>
                 <li><a href="contact.html">Contato</a></li>
               </ul>
             </div>
