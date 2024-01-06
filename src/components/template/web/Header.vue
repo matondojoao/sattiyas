@@ -110,7 +110,7 @@
             <button class="cs_header_search_close" type="button"><i class="fa-solid fa-xmark"></i></button>
           </div>
           <form action="#" class="cs_header_search_form">
-            <input type="text" placeholder="Search...">
+            <input type="text" placeholder="Procurar...">
             <button type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
