@@ -1,38 +1,5 @@
 
 export function main(){
-
-  (function ($) {
-    ('use strict');
-  
-    /*
-    |--------------------------------------------------------------------------
-    | Template Name: Sattiyas
-    | Author: Laralink
-    | Version: 1.0.0
-    |--------------------------------------------------------------------------
-    |--------------------------------------------------------------------------
-    | TABLE OF CONTENTS:
-    |--------------------------------------------------------------------------
-    |
-    | 1. Preloader
-    | 2. Mobile Menu
-    | 3. Sticky Header
-    | 4. Dynamic Background
-    | 5. Modal Video
-    | 6. Isotop Initialize
-    | 7. Scroll Up
-    | 8. Tabs
-    | 9. Review
-    | 10. Slick Slider
-    | 11. Price Range Slider
-    | 12. Single product slider
-    | 13. Shop General
-    | 
-    */
-  
-    /*--------------------------------------------------------------
-      Scripts initialization
-    --------------------------------------------------------------*/
     $.exists = function (selector) {
       return $(selector).length > 0;
     };
@@ -59,18 +26,12 @@ export function main(){
     $(window).on('scroll', function () {
       showScrollUp();
     });
-  
-    /*--------------------------------------------------------------
-      1. Preloader
-    --------------------------------------------------------------*/
+
     function preloader() {
       $('.cs_perloader').fadeOut();
       $('cs_perloader_in').delay(150).fadeOut('slow');
     }
-  
-    /*--------------------------------------------------------------
-      2. Mobile Menu
-    --------------------------------------------------------------*/
+
     function mainNav() {
       $('.cs_nav').append('<span class="cs_menu_toggle"><span></span></span>');
       $('.menu-item-has-children').append(
@@ -101,9 +62,7 @@ export function main(){
         $('.cs_header_search_wrap').removeClass('active');
       });
     }
-    /*--------------------------------------------------------------
-      3. Sticky Header
-    --------------------------------------------------------------*/
+
     function stickyHeader() {
       var $window = $(window);
       var lastScrollTop = 0;
@@ -129,9 +88,7 @@ export function main(){
         lastScrollTop = windowTop;
       });
     }
-    /*--------------------------------------------------------------
-      4. Dynamic Background
-    --------------------------------------------------------------*/
+
     function dynamicBackground() {
       $('[data-src]').each(function () {
         var src = $(this).attr('data-src');
@@ -140,9 +97,7 @@ export function main(){
         });
       });
     }
-    /*--------------------------------------------------------------
-      5. Modal Video
-    --------------------------------------------------------------*/
+
     function modalVideo() {
       if ($.exists('.cs_video_open')) {
         $('body').append(`
@@ -178,9 +133,7 @@ export function main(){
         );
       }
     }
-    /*--------------------------------------------------------------
-      6. Isotop Initialize
-    --------------------------------------------------------------*/
+
     function isotopInit() {
       if ($.exists('.cs_isotope')) {
         $('.cs_isotope').isotope({
@@ -460,5 +413,4 @@ export function main(){
         }
       });
     }
-  })(jQuery); // End of use strict
 }
