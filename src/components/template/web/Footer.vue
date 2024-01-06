@@ -41,7 +41,7 @@
                     <h3 class="cs_footer_widget_title cs_fs_21 cs_semibold">Informações de Contato</h3>
                     <ul class="cs_contact_info">
                       <li>Telefone: +244 932 932 532</li>
-                      <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="533a3d353c13203227272a2a32207d303c3e">[email&#160;protected]</a></li>
+                      <li>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="533a3d353c13203227272a2a32207d303c3e">sattiyas@sattiyas.com</a></li>
                       <li>Seg - Sex: 11h - 21h</li>
                     </ul>
                   </div>
