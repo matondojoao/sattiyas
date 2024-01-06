@@ -16,7 +16,7 @@
               <p class="cs_heto_subtitle">Somos mais do que apenas um destino de compras online; somos sua porta de entrada pessoal para um mundo de moda, estilos inovadores e conveniência incomparável. Acreditamos que a moda é um reflexo da sua individualidade, e nossa missão é tornar cada experiência de compra conosco única.</p>
               <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Compre Agora</a>
             </div>
-            <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath1})` }"></div>
+            <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath2})` }"></div>
           </div>
         </div>
         <div class="slick_slide_in">
@@ -26,7 +26,7 @@
               <p class="cs_heto_subtitle">Somos mais do que apenas um destino de compras online; somos sua porta de entrada pessoal para um mundo de moda, estilos inovadores e conveniência incomparável. Acreditamos que a moda é um reflexo da sua individualidade, e nossa missão é tornar cada experiência de compra conosco única.</p>
               <a href="shop.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Compre Agora</a>
             </div>
-            <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath2})` }"></div>
+            <div class="cs_hero_thumb cs_bg_filed" :style="{ 'background-image': `url(${imagePath1})` }"></div>
           </div>
         </div>
         <div class="slick_slide_in">
