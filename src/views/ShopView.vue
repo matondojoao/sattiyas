@@ -196,17 +196,17 @@ onMounted(async () => {
                                     </div>
 
                                     <div class="cs_cart_badge position-absolute">
-                                        <button @click="addToWishList(product.id)" class="cs_cart_icon cs_accent_bg cs_white_color">
+                                        <a @click="addToWishList(product.id)" class="cs_cart_icon cs_accent_bg cs_white_color" style="cursor: pointer;">
                                             <i class="fa-regular fa-heart"></i>
-                                        </button>
+                                        </a>
                                         <RouterLink :to="{name:'produto', params:{slug: product.slug}}" class="cs_cart_icon cs_accent_bg cs_white_color">
                                             <i class="fa-regular fa-eye"></i>
                                         </RouterLink>
                                     </div>
 
-                                    <button @click="addProductToCart(product.id)"
+                                    <a @click="addProductToCart(product.id)"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
-                                        style="border: none;">Adicionar ao Carrinho</button>
+                                        >Adicionar ao Carrinho</a>
 
 
                                 </div>

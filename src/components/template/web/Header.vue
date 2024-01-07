@@ -73,6 +73,7 @@
                 <i class="fa-regular fa-circle-user"></i>
               </RouterLink>
               <RouterLink :to="{name:'carrinho'}" class="cs_action_icon">
+                <div class="carrinho-badge">3</div>
                 <span>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_395_1018)">
@@ -121,6 +122,26 @@
   </header>
 </template>
 
-<script>
+<style>
+.cs_action_icon {
+  position: relative;
+  display: inline-block;
+}
 
-</script>
+.carrinho-badge {
+  position: absolute;
+  top: -5px;
+  right: -11px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  z-index: 1;
+}
+
+</style>
