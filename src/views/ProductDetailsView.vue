@@ -5,7 +5,10 @@ import Perloader from '@/components/template/web/Perloader.vue';
 import http from '@/services/http.js'
 import { main } from '@/assets/js/main.js'
 import { userAuth } from '@/stores/auth';
+import { useShoppingCartStore } from '@/stores/cart';
+import { useWishListStore } from '@/stores/wishlist';
 
+const shoppingCartStore = useShoppingCartStore();
 const auth = userAuth();
 const showPerloader = ref(true);
 const isDataLoaded = ref();
@@ -21,6 +24,15 @@ watchEffect(() => {
       main();
    }
 });
+
+function addToCart(product_id, product_name, product_image, regular_price, sale_price, quantity) {
+    let price = sale_price || regular_price;
+    shoppingCartStore.addToCart(product_id, product_name, product_image, price, quantity);
+}
+
+const addToWishList = async (product)=>{
+    await useWishListStore().addProductToWishList(product)
+}
 
 const fechProduct = async () => {
    try {
@@ -202,8 +214,8 @@ const formatarData = (timestampString) => {
                         <span class="cs_quantity_input">1</span>
                         <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
                      </div>
-                     <a href="#" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
-                     <button class="cs_heart_btn"><i class="fa-regular fa-heart"></i></button>
+                     <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
+                     <button class="cs_heart_btn" @click="addToWishList(product.id)"><i class="fa-regular fa-heart"></i></button>
                   </div>
                   <ul class="cs_single_product_info">
                      <li class="cs_fs_16 cs_normal">
