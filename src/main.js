@@ -14,21 +14,24 @@ app.use(pinia)
 app.config.globalProperties.$http = http
 
 app.config.globalProperties.$filters = {
-    formatCurrency(price) {
-        if (typeof price !== 'number') {
-            console.error('O valor não é um número.');
-            return '';
-          }
-        
-          const formattedPrice = price.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
-        
-          return formattedPrice;
-        }
+  formatCurrency(price) {
+    const parsedPrice = parseFloat(price);
+
+    if (isNaN(parsedPrice)) {
+      console.error('O valor não é um número.');
+      return '';
     }
+
+    const formattedPrice = parsedPrice.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+    return formattedPrice;
+  }
+}
+
 
 app.mount('#app')

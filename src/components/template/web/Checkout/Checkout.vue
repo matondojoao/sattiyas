@@ -1,10 +1,27 @@
 <script setup>
 import { useRouter, RouterLink } from "vue-router";
+import { computed, onMounted } from "vue";
+import { useShoppingCartStore } from '@/stores/cart';
+
 const router = useRouter();
 
 const placeOrder = () => {
     router.push('/sucesso');
 };
+
+const shoppingCartStore = useShoppingCartStore();
+
+onMounted(async () => {
+});
+
+const items = computed(() => {
+  return shoppingCartStore.getCartItems
+});
+
+const totalCart = computed(() => {
+  return shoppingCartStore.getTotalCart
+});
+
 </script>
 <template>
     <div class="container">
@@ -88,25 +105,17 @@ const placeOrder = () => {
                                     <td>Produtos</td>
                                     <td class="text-end">Valor</td>
                                 </tr>
-                                <tr>
-                                    <td>Camiseta masculina incrível x 1</td>
-                                    <td class="text-end">$20.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Brinquedo robô AI do futuro x 1</td>
-                                    <td class="text-end">$550.00</td>
-                                </tr>
-                                <tr>
-                                    <td>Shampoo de semente de cânhamo x 1</td>
-                                    <td class="text-end">$35.00</td>
+                                <tr v-for="item in items" :key="item.product_id">
+                                    <td>{{ item.product_name }} x {{ item.quantity }}</td>
+                                    <td class="text-end">{{ $filters.formatCurrency(item.price) }}</td>
                                 </tr>
                                 <tr class="cs_semi_bold">
                                     <td>Subtotal</td>
-                                    <td class="text-end">$605.00</td>
+                                    <td class="text-end">{{ $filters.formatCurrency(totalCart) }}</td>
                                 </tr>
                                 <tr class="cs_semi_bold">
                                     <td>Total</td>
-                                    <td class="text-end">$605.00</td>
+                                    <td class="text-end">{{ $filters.formatCurrency(totalCart) }}</td>
                                 </tr>
                             </tbody>
                         </table>
