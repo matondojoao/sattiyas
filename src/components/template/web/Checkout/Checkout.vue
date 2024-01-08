@@ -15,11 +15,11 @@ onMounted(async () => {
 });
 
 const items = computed(() => {
-  return shoppingCartStore.getCartItems
+    return shoppingCartStore.getCartItems
 });
 
 const totalCart = computed(() => {
-  return shoppingCartStore.getTotalCart
+    return shoppingCartStore.getTotalCart
 });
 
 </script>
@@ -120,7 +120,6 @@ const totalCart = computed(() => {
                             </tbody>
                         </table>
                         <div class="cs_height_30 cs_height_lg_30"></div>
-                        <a href="success.html" class="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">Finalizar Pedido</a>
                     </div>
                     <div class="cs_height_50 cs_height_lg_30"></div>
                     <div class="cs_shop-card">
@@ -137,6 +136,22 @@ const totalCart = computed(() => {
                                             </label>
                                         </div>
                                         <p class="m-0 cs_payment_text">Efetue o pagamento com cartão de crédito.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <form id="creditCardForm">
+                                            <input type="text" id="cardHolderName" class="cs_checkout-input"
+                                                name="cardHolderName" placeholder="Nome no Cartão" required>
+                                            <input type="text" id="cardNumber" name="cardNumber" class="cs_checkout-input"
+                                                placeholder="Número do Cartão" required>
+                                            <div style="display: flex; gap: 10px;">
+                                                <input type="text" id="cvv" name="cvv" class="cs_checkout-input"
+                                                    placeholder="CVV" required>
+                                                <input type="text" id="expiryDate" name="expiryDate"
+                                                    class="cs_checkout-input" placeholder="MM/AA" required>
+                                            </div>
+                                        </form>
                                     </td>
 
                                 </tr>
