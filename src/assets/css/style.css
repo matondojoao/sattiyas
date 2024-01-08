@@ -7079,6 +7079,7 @@ Pavigation styling
 @media (max-width: 991px) {
   .cs_coupon-doce-form input {
     height: 44px;
+    width: 200px;
   }
 }
 .cs_coupon-doce-form input::-webkit-input-placeholder {
