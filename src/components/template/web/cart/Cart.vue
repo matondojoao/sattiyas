@@ -8,6 +8,9 @@
 onMounted(async () => {
 });
 
+ function removeFromCart(product_id){
+  shoppingCartStore.removeFromCart(product_id)
+}
   const items = computed(()=>{
     return shoppingCartStore.getCartItems
   });
@@ -47,7 +50,7 @@ onMounted(async () => {
                   </td>
                   <td>{{ item.quantity * item.regular_price}}</td>
                   <td class="text-center">
-                    <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="cs_cart-table-close" @click="removeFromCart(item.product_id)"><i class="fa-solid fa-xmark"></i></button>
                   </td>
                 </tr>
               </tbody>

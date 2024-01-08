@@ -6,7 +6,7 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
     }),
 
     actions: {
-        addToCart(product_id,product_name, product_image,regular_price,quantity) {
+        addToCart(product_id, product_name, product_image, regular_price, quantity) {
             const existingProductIndex = this.cartItems.findIndex(item => item.product_id === product_id);
             if (existingProductIndex !== -1) {
                 this.cartItems[existingProductIndex].quantity += quantity;
@@ -23,7 +23,14 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
             localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
 
             console.log("Produto adicionado ao carrinho com sucesso")
-        }
+        },
+
+        removeFromCart(product_id) {
+            const updatedCartItems = this.cartItems.filter(item => item.product_id !== product_id);
+            this.cartItems = updatedCartItems;
+
+            localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+        },
     },
 
     getters: {
