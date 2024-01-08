@@ -175,7 +175,7 @@ onMounted(async () => {
                                         </RouterLink>
                                     </div>
 
-                                    <a @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )"
+                                    <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
                                         >Adicionar ao Carrinho</a>
 
@@ -200,7 +200,7 @@ onMounted(async () => {
                                     </p>
                                     <p class="cs_product_desc">{{ product.description }}</p>
                                     <div class="cs_action_btns">
-                                        <a href="#" class="cs_btn cs_style_1 cs_fs_16 cs_medium cs_accent_btn">Adicionar ao
+                                        <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )" class="cs_btn cs_style_1 cs_fs_16 cs_medium cs_accent_btn">Adicionar ao
                                             Carrinho</a>
                                         <button class="cs_heart_btn"><i class="fa-regular fa-heart"></i></button>
                                     </div>
