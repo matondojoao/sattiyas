@@ -4,7 +4,7 @@ import FilterSidebar from '@/components/template/web/shop/FilterSidebar.vue'
 import { main } from '@/assets/js/main.js'
 import { onMounted, ref, watchEffect, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
-import { useCartStore } from '@/stores/cart';
+import { useShoppingCartStore } from '@/stores/cart';
 import Perloader from '@/components/template/web/Perloader.vue'
 import { RouterLink } from 'vue-router'
 import { useWishListStore } from '@/stores/wishlist';
@@ -12,10 +12,7 @@ import http from '@/services/http.js'
 import axios from 'axios';
 
 const showPerloader = ref(true);
-const cart = useCartStore()
-const addToCart = (product) => {
-    cart.addProductToCart({ product, quantity: 1 });
-};
+const shoppingCartStore = useShoppingCartStore()
 
 const fetchProducts = async () => {
     try {
@@ -25,36 +22,9 @@ const fetchProducts = async () => {
         console.error('Erro ao buscar produtos:', error);
     }
 };
-
-const addProductToCart = async (product, quantity = 1) => {
-    const cartItem = { product, quantity };
-
-    try {
-        const add = await axios.post('https://api.ecommerce.aviatocreative.com/v1/cart/add', cartItem, { withCredentials: true });
-        console.log(add.data);
-        const response = await axios.get('https://api.ecommerce.aviatocreative.com/v1//cart', { withCredentials: true });
-        console.log(response.data);
-    } catch (error) {
-        console.error('Erro ao adicionar produto ao carrinho:', error);
-    }
+function addToCart(product_id, product_name, product_image, regular_price, quantity) {
+    shoppingCartStore.addToCart(product_id, product_name, product_image, regular_price, quantity);
 }
-
-
-function getCookie(cookieName) {
-    const name = cookieName + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-
-    return null;
-}
-
 
 const calculateDiscountPercentage = (product) => {
     if (product.regular_price > 0 && product.sale_price !== null) {
@@ -204,7 +174,7 @@ onMounted(async () => {
                                         </RouterLink>
                                     </div>
 
-                                    <a @click="addProductToCart(product.id)"
+                                    <a @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,1 )"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
                                         >Adicionar ao Carrinho</a>
 

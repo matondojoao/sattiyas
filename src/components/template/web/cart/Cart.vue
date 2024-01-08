@@ -1,23 +1,15 @@
 <script setup>
   import { RouterLink } from "vue-router";
   import { computed, onMounted } from "vue";
-  import { useCartStore  } from '@/stores/cart';
+  import { useShoppingCartStore  } from '@/stores/cart';
 
-  const fetchCategories = async () => {
-    try {
-        await useCartStore().fetchItems();
-        items.value = useCartStore().getItems;
-    } catch (error) {
-        console.error('Erro ao buscar items do carrinho:', error);
-    }
-};
-
+  const shoppingCartStore = useShoppingCartStore();
+  
 onMounted(async () => {
-  fetchCategories();
 });
 
   const items = computed(()=>{
-    return useCartStore.getItems
+    return shoppingCartStore.getCartItems
   });
 
 </script>
@@ -41,7 +33,7 @@ onMounted(async () => {
                 <tr v-for="item in items" :key="item.product_id">
                   <td>
                     <div class="cs_cart_table_media">
-                      <img :src="item.first_image" alt="Thumb">
+                      <img :src="item.product_image" alt="Thumb">
                       <h3>{{ item.product_name }}</h3>
                     </div>
                   </td>
@@ -53,7 +45,7 @@ onMounted(async () => {
                       <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
                     </div>
                   </td>
-                  <td>{{ item.total }}</td>
+                  <td>{{ item.quantity * item.regular_price}}</td>
                   <td class="text-center">
                     <button class="cs_cart-table-close"><i class="fa-solid fa-xmark"></i></button>
                   </td>

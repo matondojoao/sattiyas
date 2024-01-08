@@ -1,5 +1,17 @@
 <script setup>
-  import { RouterLink } from "vue-router";
+import { RouterLink } from "vue-router";
+import { computed, onMounted } from "vue";
+import { useShoppingCartStore } from '@/stores/cart';
+
+const shoppingCartStore = useShoppingCartStore();
+
+onMounted(async () => {
+});
+
+const totalItems = computed(() => {
+  return shoppingCartStore.getCartItems.length
+});
+
 </script>
 <template>
   <header class="cs_site_header cs_style_1 cs_color_1 cs_primary_bg cs_site_header_full_width cs_sticky_header">
@@ -21,13 +33,13 @@
                 <b class="cs_text_slide cs_medium">
                   <span>Oferta especial com 50% de desconto</span>
                   <span>
-                    <RouterLink :to="{name:'loja'}" class="cs_text_slide_btn">Saiba Mais</RouterLink>
+                    <RouterLink :to="{ name: 'loja' }" class="cs_text_slide_btn">Saiba Mais</RouterLink>
                   </span>
                 </b>
                 <b class="cs_text_slide cs_medium">
                   <span>Novo item de chegada para você</span>
                   <span>
-                    <RouterLink :to="{name:'loja'}" class="cs_text_slide_btn">Saiba Mais</RouterLink>
+                    <RouterLink :to="{ name: 'loja' }" class="cs_text_slide_btn">Saiba Mais</RouterLink>
                   </span>
                 </b>
               </span>
@@ -52,10 +64,10 @@
             <div class="cs_nav cs_medium">
               <ul class="cs_nav_list">
                 <li class="menu-item">
-                  <RouterLink :to="{name:'home'}">Início</RouterLink>
+                  <RouterLink :to="{ name: 'home' }">Início</RouterLink>
                 </li>
                 <li class="menu-item">
-                  <RouterLink :to="{name:'loja'}">Loja</RouterLink>
+                  <RouterLink :to="{ name: 'loja' }">Loja</RouterLink>
                 </li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="quem-somos.html">Quem Somos</a></li>
@@ -69,11 +81,11 @@
               <button type="button" class="cs_action_icon cs_header_search_btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
-              <RouterLink :to="{name:'login'}" class="cs_action_icon cs_modal_btn">
+              <RouterLink :to="{ name: 'login' }" class="cs_action_icon cs_modal_btn">
                 <i class="fa-regular fa-circle-user"></i>
               </RouterLink>
-              <RouterLink :to="{name:'carrinho'}" class="cs_action_icon">
-                <div class="carrinho-badge">3</div>
+              <RouterLink :to="{ name: 'carrinho' }" class="cs_action_icon">
+                <div class="carrinho-badge">{{ totalItems }}</div>
                 <span>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_395_1018)">
@@ -95,9 +107,9 @@
                   </svg>
                 </span>
               </RouterLink>
-              <RouterLink :to="{name:'lista-de-desejos'}" class="cs_action_icon cs_modal_btn">
-                 <i class="fa-regular fa-heart"></i> 
-               </RouterLink>
+              <RouterLink :to="{ name: 'lista-de-desejos' }" class="cs_action_icon cs_modal_btn">
+                <i class="fa-regular fa-heart"></i>
+              </RouterLink>
             </div>
           </div>
         </div>
@@ -143,5 +155,4 @@
   font-size: 12px;
   z-index: 1;
 }
-
 </style>
