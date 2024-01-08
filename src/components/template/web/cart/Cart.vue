@@ -27,6 +27,22 @@ const totalCart = computed(() => {
   return shoppingCartStore.getTotalCart
 });
 
+function formatCurrency(price) {
+  if (typeof price !== 'number') {
+    console.error('O valor não é um número.');
+    return '';
+  }
+
+  const formattedPrice = price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return formattedPrice;
+}
+
 </script>
 
 <template>
@@ -62,7 +78,7 @@ const totalCart = computed(() => {
                         class="fa-solid fa-angle-down"></i></button>
                   </div>
                 </td>
-                <td>{{ item.quantity * item.regular_price }}</td>
+                <td>{{ $filters.formatCurrency(item.quantity * item.price) }}</td>
                 <td class="text-center">
                   <button class="cs_cart-table-close" @click="removeFromCart(item.product_id)"><i
                       class="fa-solid fa-xmark"></i></button>
@@ -87,11 +103,11 @@ const totalCart = computed(() => {
               <tbody>
                 <tr>
                   <td>Subtotal</td>
-                  <td class="text-end">{{ totalCart }}</td>
+                  <td class="text-end">{{ $filters.formatCurrency(totalCart) }}</td>
                 </tr>
                 <tr>
                   <td>Total</td>
-                  <td class="text-end">{{ totalCart }}</td>
+                  <td class="text-end">{{ $filters.formatCurrency(totalCart) }}</td>
                 </tr>
               </tbody>
             </table>

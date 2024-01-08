@@ -22,8 +22,9 @@ const fetchProducts = async () => {
         console.error('Erro ao buscar produtos:', error);
     }
 };
-function addToCart(product_id, product_name, product_image, regular_price, quantity) {
-    shoppingCartStore.addToCart(product_id, product_name, product_image, regular_price, quantity);
+function addToCart(product_id, product_name, product_image, regular_price, sale_price, quantity) {
+    let price = sale_price || regular_price;
+    shoppingCartStore.addToCart(product_id, product_name, product_image, price, quantity);
 }
 
 const calculateDiscountPercentage = (product) => {
@@ -174,7 +175,7 @@ onMounted(async () => {
                                         </RouterLink>
                                     </div>
 
-                                    <a @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,1 )"
+                                    <a @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )"
                                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
                                         >Adicionar ao Carrinho</a>
 
@@ -194,8 +195,8 @@ onMounted(async () => {
                                         <span>Estoque: <span class="cs_accent_color">{{ product.stock.stock_units }} em
                                                 estoque</span></span>
                                     </div>
-                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{
-                                        product.regular_price }}
+                                    <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">
+                                        {{$filters.formatCurrency(product.regular_price) }}
                                     </p>
                                     <p class="cs_product_desc">{{ product.description }}</p>
                                     <div class="cs_action_btns">
