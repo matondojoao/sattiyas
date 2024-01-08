@@ -7,6 +7,8 @@ export const useShoppingCartStore = defineStore('shoppingCart',{
 
   actions: {
     addToCart(product_id, product_name, product_image, price, quantity) {
+      const currentDate = new Date().toISOString();
+      
       const existingProductIndex = this.cartItems.findIndex(item => item.product_id === product_id);
       if (existingProductIndex !== -1) {
         this.cartItems[existingProductIndex].quantity += quantity;
@@ -17,12 +19,18 @@ export const useShoppingCartStore = defineStore('shoppingCart',{
           product_image,
           quantity,
           price,
+          dateAdded: currentDate,
         });
       }
 
+      this.sortCartByDateAdded();
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
 
       console.log('Produto adicionado ao carrinho com sucesso');
+    },
+
+    sortCartByDateAdded() {
+      this.cartItems.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
     },
 
     removeFromCart(product_id) {
@@ -50,7 +58,7 @@ export const useShoppingCartStore = defineStore('shoppingCart',{
       return this.cartItems;
     },
     getTotalCart(){
-        return this.cartItems.reduce((total, item) => total + item.quantity * item.price, 0)
+      return this.cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
     }
   },
 });

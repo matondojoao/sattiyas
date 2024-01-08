@@ -181,8 +181,8 @@ const formatarData = (timestampString) => {
                      <span>Estoque: <span class="cs_accent_color">{{ product?.stock?.stock_units }} em
                            estoque</span></span>
                   </div>
-                  <h4 class="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">Preço: {{
-                     product?.regular_price }}</h4>
+                  <h4 class="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">Preço: 
+                     {{$filters.formatCurrency(product?.regular_price) }}</h4>
                   <hr>
                   <div class="cs_single_product_details_text">
                      <p class="mb-0">{{ product?.body }}</p>
@@ -370,7 +370,7 @@ const formatarData = (timestampString) => {
                         <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }">{{ relatedProduct.name
                         }}</RouterLink>
                      </h3>
-                     <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{ relatedProduct.regular_price }}
+                     <p class="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">{{$filters.formatCurrency(relatedProduct.regular_price) }}
                      </p>
                   </div>
                </div>

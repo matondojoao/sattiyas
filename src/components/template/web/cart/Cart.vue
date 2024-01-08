@@ -68,7 +68,7 @@ function formatCurrency(price) {
                     <h3>{{ item.product_name }}</h3>
                   </div>
                 </td>
-                <td>{{ item.price }}</td>
+                <td>{{ $filters.formatCurrency(item.price) }}</td>
                 <td>
                   <div class="cs_quantity">
                     <button class="cs_quantity_btn cs_increment" @click="incrementQuantity(item.product_id,item.quantity)"><i
