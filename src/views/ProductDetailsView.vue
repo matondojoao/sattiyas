@@ -217,7 +217,7 @@ const formatarData = (timestampString) => {
                         <input class="cs_quantity_input" type="text" v-model="quantity">
                         <button class="cs_quantity_btn cs_decrement" @click="quantity--"><i class="fa-solid fa-angle-down"></i></button>
                      </div>
-                     <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price)" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
+                     <a v-if="isUserAuthenticated" style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price)" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
                      <button class="cs_heart_btn" @click="addToWishList(product.id)"><i class="fa-regular fa-heart"></i></button>
                   </div>
                   <ul class="cs_single_product_info">
@@ -356,7 +356,7 @@ const formatarData = (timestampString) => {
                   <div class="cs_product_thumb position-relative">
                      <img :src="relatedProduct.images[0].image_path" :alt="relatedProduct.name">
                      <div class="cs_cart_badge position-absolute">
-                        <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                        <a v-if="isUserAuthenticated" @click="addToWishList(relatedProduct.id)" class="cs_cart_icon cs_accent_bg cs_white_color">
                            <i class="fa-regular fa-heart"></i>
                         </a>
                         <RouterLink :to="{ name: 'produto', params: { slug: relatedProduct.slug } }"
