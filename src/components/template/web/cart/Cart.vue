@@ -12,12 +12,13 @@ function removeFromCart(product_id) {
   shoppingCartStore.removeFromCart(product_id)
 }
 function incrementQuantity(product_id,quantity){
-  shoppingCartStore.updateQuantity(product_id,quantity + 1);
+  let incrementQuantity = quantity ++
+  shoppingCartStore.updateQuantity(product_id,quantity);
 };
+
 function decrementQuantity(product_id,quantity){
-  if (item.quantity > 0) {
-    shoppingCartStore.updateQuantity(product_id,quantity - 1);
-  }
+  let decrementQuantity = quantity --
+  shoppingCartStore.updateQuantity(product_id,quantity);
 };
 const items = computed(() => {
   return shoppingCartStore.getCartItems
@@ -70,13 +71,12 @@ function formatCurrency(price) {
                 </td>
                 <td>{{ $filters.formatCurrency(item.price) }}</td>
                 <td>
+
                   <div class="cs_quantity">
-                    <button class="cs_quantity_btn cs_increment" @click="incrementQuantity(item.product_id,item.quantity)"><i
-                        class="fa-solid fa-angle-up"></i></button>
-                    <span class="cs_quantity_input">{{ item.quantity }}</span>
-                    <button class="cs_quantity_btn cs_decrement" @click="decrementQuantity(item.product_id,item.quantity)"><i
-                        class="fa-solid fa-angle-down"></i></button>
-                  </div>
+                        <button class="cs_quantity_btn cs_increment" @click="incrementQuantity(item.product_id,item.quantity)"><i class="fa-solid fa-angle-up"></i></button>
+                        <input class="cs_quantity_input" type="text" :value="item.quantity">
+                        <button class="cs_quantity_btn cs_decrement" @click="decrementQuantity(item.product_id,item.quantity)"><i class="fa-solid fa-angle-down"></i></button>
+                     </div>
                 </td>
                 <td>{{ $filters.formatCurrency(item.quantity * item.price) }}</td>
                 <td class="text-center">
