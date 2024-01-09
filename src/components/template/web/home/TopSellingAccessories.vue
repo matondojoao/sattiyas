@@ -2,9 +2,11 @@
 import { onMounted, ref, watchEffect } from 'vue';
 import { main } from '@/assets/js/main.js';
 import http from '@/services/http.js';
+import { useShoppingCartStore } from '@/stores/cart';
 
 const products = ref([]);
 const isDataLoaded = ref(false);
+const shoppingCartStore = useShoppingCartStore()
 
 const fetchProducts = async () => {
   try {
@@ -15,6 +17,11 @@ const fetchProducts = async () => {
     console.error('Erro ao buscar acessorios:', error);
   }
 };
+
+function addToCart(product_id, product_name, product_image, regular_price, sale_price, quantity) {
+    let price = sale_price || regular_price;
+    shoppingCartStore.addToCart(product_id, product_name, product_image, price, quantity);
+}
 
 onMounted(async () => {
   await fetchProducts();
@@ -63,7 +70,7 @@ watchEffect(() => {
                     <i class="fa-regular fa-eye"></i>
                   </RouterLink>
                 </div>
-                <a href="cart.html"
+                <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )"
                   class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar ao
                   Carrinho</a>
               </div>

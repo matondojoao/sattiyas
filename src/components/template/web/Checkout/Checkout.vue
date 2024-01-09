@@ -22,6 +22,13 @@ const totalCart = computed(() => {
     return shoppingCartStore.getTotalCart
 });
 
+const card = ref({
+    number:'',
+    cvc:'',
+    exp_month:'',
+    exp_year:'',
+})
+
 </script>
 <template>
     <div class="container">
@@ -143,13 +150,15 @@ const totalCart = computed(() => {
                                         <form id="creditCardForm">
                                             <input type="text" id="cardHolderName" class="cs_checkout-input"
                                                 name="cardHolderName" placeholder="Nome no Cartão" required>
-                                            <input type="text" id="cardNumber" name="cardNumber" class="cs_checkout-input"
+                                            <input type="text" id="cardNumber" name="cardNumber" v-model="card.number" class="cs_checkout-input"
                                                 placeholder="Número do Cartão" required>
-                                            <div style="display: flex; gap: 10px;">
-                                                <input type="text" id="cvv" name="cvv" class="cs_checkout-input"
+                                                <input type="text" id="cvv" name="cvv" v-model="card.cvc" class="cs_checkout-input"
                                                     placeholder="CVV" required>
-                                                <input type="text" id="expiryDate" name="expiryDate"
-                                                    class="cs_checkout-input" placeholder="MM/AA" required>
+                                            <div style="display: flex; gap: 10px;">
+                                                <input type="text" id="cvv" name="cvv" v-model="card.cvc" class="cs_checkout-input"
+                                                    placeholder="mes" required>
+                                                <input type="text" id="expiryDate" v-model="card.cvc" name="expiryDate"
+                                                    class="cs_checkout-input" placeholder="ano" required>
                                             </div>
                                         </form>
                                     </td>
