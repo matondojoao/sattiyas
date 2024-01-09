@@ -18,6 +18,7 @@ const slug = ref(route.params.slug);
 const product = ref(null)
 const relatedProducts = ref([])
 const comment = ref()
+const quantity = ref(1)
 
 watchEffect(() => {
    if (isDataLoaded.value) {
@@ -25,10 +26,12 @@ watchEffect(() => {
    }
 });
 
-function addToCart(product_id, product_name, product_image, regular_price, sale_price, quantity) {
+function addToCart(product_id, product_name, product_image, regular_price, sale_price) {
     let price = sale_price || regular_price;
-    shoppingCartStore.addToCart(product_id, product_name, product_image, price, quantity);
+    let productQuantity = quantity.value;
+    shoppingCartStore.addToCart(product_id, product_name, product_image, price, productQuantity);
 }
+
 
 const addToWishList = async (product)=>{
     await useWishListStore().addProductToWishList(product)
@@ -210,11 +213,11 @@ const formatarData = (timestampString) => {
                   </div>
                   <div class="cs_action_btns">
                      <div class="cs_quantity">
-                        <button class="cs_quantity_btn cs_increment"><i class="fa-solid fa-angle-up"></i></button>
-                        <span class="cs_quantity_input">1</span>
-                        <button class="cs_quantity_btn cs_decrement"><i class="fa-solid fa-angle-down"></i></button>
+                        <button class="cs_quantity_btn cs_increment" @click="quantity++"><i class="fa-solid fa-angle-up"></i></button>
+                        <input class="cs_quantity_input" type="text" v-model="quantity">
+                        <button class="cs_quantity_btn cs_decrement" @click="quantity--"><i class="fa-solid fa-angle-down"></i></button>
                      </div>
-                     <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price,1 )" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
+                     <a style="cursor: pointer;" @click="addToCart(product.id,product.name,product.images[0].image_path,product.regular_price,product.sale_price)" class="cs_btn cs_style_1 cs_fs_16 cs_medium">Adicionar ao Carrinho</a>
                      <button class="cs_heart_btn" @click="addToWishList(product.id)"><i class="fa-regular fa-heart"></i></button>
                   </div>
                   <ul class="cs_single_product_info">
@@ -361,7 +364,7 @@ const formatarData = (timestampString) => {
                            <i class="fa-regular fa-eye"></i>
                         </RouterLink>
                      </div>
-                     <a href="cart.html"
+                     <a style="cursor: pointer;" @click="addToCart(relatedProduct.id,relatedProduct.name,relatedProduct.images[0].image_path,relatedProduct.regular_price,relatedProduct.sale_price)"
                         class="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute">Adicionar ao
                         Carrinho</a>
                   </div>
