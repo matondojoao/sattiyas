@@ -3,11 +3,34 @@ import { onMounted, ref, watchEffect } from 'vue';
 import { main } from '@/assets/js/main.js';
 import http from '@/services/http.js';
 import { useShoppingCartStore } from '@/stores/cart';
+import { userAuth } from '@/stores/auth';
 
 const products = ref([]);
 const isDataLoaded = ref(false);
+const isUserAuthenticated = ref(false)
 const shoppingCartStore = useShoppingCartStore()
+const auth = userAuth();
+async function checkAuthentication() {
 
+try {
+
+   const tokenAuth = 'Bearer ' + auth.token;
+   const data = await http.get('/auth/verify', {
+      headers: {
+         'Authorization': tokenAuth
+      }
+   });
+
+   if (data.data.authenticated == true) {
+      isUserAuthenticated.value = true;
+   } else {
+      isUserAuthenticated.value = false;
+   }
+} catch (error) {
+   console.error('Erro ao verificar o token:', error);
+}
+
+}
 const fetchProducts = async () => {
   try {
     const response = await http.get('/products?categories[]=174a942f-b996-43a9-9ae6-e2121a684c4c')
@@ -62,7 +85,7 @@ watchEffect(() => {
               <div class="cs_product_thumb position-relative">
                 <img :src="product.images[0].image_path" :alt="product.name">
                 <div class="cs_cart_badge position-absolute">
-                  <a href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
+                  <a v-if="isUserAuthenticated" href="wishlist.html" class="cs_cart_icon cs_accent_bg cs_white_color">
                     <i class="fa-regular fa-heart"></i>
                   </a>
                   <RouterLink :to="{ name: 'produto', params: { slug: product.slug } }"
